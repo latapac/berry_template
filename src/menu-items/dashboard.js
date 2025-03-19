@@ -22,6 +22,14 @@ const dashboard = {
       breadcrumbs: false
     },
     {
+      id: 'default',
+      title: 'Dash2',
+      type: 'item',
+      url: '/dash',
+      icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
       id: 'audit',
       title: 'Audit Trail',
       type: 'item',
