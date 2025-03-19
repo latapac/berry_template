@@ -8,7 +8,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import { mstatus } from '../../constants';
+import {getMstatusBGColor} from '../../constants';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
@@ -44,7 +45,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-export default function TotalIncomeDarkCard({ isLoading }) {
+export default function TotalIncomeDarkCard({ isLoading ,data}) {
   const theme = useTheme();
 
   return (
@@ -77,7 +78,7 @@ export default function TotalIncomeDarkCard({ isLoading }) {
                   }}
                   primary={
                     <Typography variant="h4" sx={{ color: '#fff' }} >
-                      Status : <span className='bg-green-500 p-2 ml-14 rounded-md'>Running</span>
+                      Status : <span className={`${getMstatusBGColor(mstatus[data?.status[0]])} p-2 ml-14 rounded-md`}>{mstatus[data?.status[0]]}</span>
                     </Typography>
                   }
                   secondary={
