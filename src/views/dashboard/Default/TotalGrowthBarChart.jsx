@@ -92,10 +92,10 @@ export default function TotalGrowthBarChart({ isLoading }) {
                 <Grid>
                   <Grid container direction="column" spacing={1}>
                     <Grid>
-                      <Typography variant="subtitle2">Total Run Time</Typography>
+                      <Typography variant="subtitle2"></Typography>
                     </Grid>
                     <Grid>
-                      <Typography variant="h3">720 min</Typography>
+                      <Typography variant="h3">Production Details</Typography>
                     </Grid>
                   </Grid>
                 </Grid>

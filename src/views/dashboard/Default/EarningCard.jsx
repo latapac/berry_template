@@ -10,6 +10,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { IconRosetteDiscountCheck } from '@tabler/icons-react';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -18,7 +19,7 @@ import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 // assets
 import EarningIcon from 'assets/images/icons/earning.svg';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
 import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
@@ -68,7 +69,7 @@ export default function EarningCard({ isLoading, data }) {
               content: '""',
               position: 'absolute',
               width: 210,
-              height: 210,
+              height: 0,
               background: theme.palette.secondary[800],
               borderRadius: '50%',
               top: { xs: -125 },
@@ -91,7 +92,7 @@ export default function EarningCard({ isLoading, data }) {
                         mt: 1
                       }}
                     >
-                      <CardMedia sx={{ width: 24, height: 24 }} component="img" src={EarningIcon} alt="Notification" />
+                      <CardMedia sx={{ width: 24, height: 14 }} component="img" src={EarningIcon} alt="Notification" />
                     </Avatar>
                   </Grid>
                   <Grid>
@@ -143,9 +144,9 @@ export default function EarningCard({ isLoading, data }) {
                 </Grid>
               </Grid>
               <Grid>
-                <Grid container sx={{ alignItems: 'center' }}>
+                <Grid container sx={{ alignItems: 'center'}} >
                   <Grid>
-                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data?.Total_Production[0]}</Typography>
+                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{data?.Total_Production[0]}</Typography>
                   </Grid>
                   <Grid>
                     <Avatar
@@ -156,7 +157,7 @@ export default function EarningCard({ isLoading, data }) {
                         color: 'secondary.dark'
                       }}
                     >
-                      <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                      
                     </Avatar>
                   </Grid>
                 </Grid>
