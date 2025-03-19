@@ -70,7 +70,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
             }
           }}
         >
-          <Box sx={{ p: 2.25 }}>
+          <Box sx={{ p: 1 }}>
             <Grid container direction="column">
               <Grid>
                 <Grid container sx={{ justifyContent: 'space-between' }}>
@@ -116,9 +116,9 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                     <Grid container sx={{ alignItems: 'center' }}>
                       <Grid>
                         {timeValue ? (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data?.Good_Count[0]}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{data?.Good_Count[0]}</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data?.Good_Count[0]}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500}}>{data?.Good_Count[0]}</Typography>
                         )}
                       </Grid>
                       
