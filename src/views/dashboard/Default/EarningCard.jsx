@@ -55,27 +55,7 @@ export default function EarningCard({ isLoading, data }) {
             color: '#fff',
             overflow: 'hidden',
             position: 'relative',
-            '&:after': {
-              content: '""',
-              position: 'absolute',
-              width: 210,
-              height: 210,
-              background: theme.palette.secondary[800],
-              borderRadius: '50%',
-              top: { xs: -85 },
-              right: { xs: -95 }
-            },
-            '&:before': {
-              content: '""',
-              position: 'absolute',
-              width: 210,
-              height: 0,
-              background: theme.palette.secondary[800],
-              borderRadius: '50%',
-              top: { xs: -125 },
-              right: { xs: -15 },
-              opacity: 0.5
-            }
+           
           }}
         >
           <Box sx={{ p: 2.25 }}>

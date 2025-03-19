@@ -47,27 +47,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
               position: 'relative',
               zIndex: 5
             },
-            '&:after': {
-              content: '""',
-              position: 'absolute',
-              width: 210,
-              height: 210,
-              background: theme.palette.primary[800],
-              borderRadius: '50%',
-              top: { xs: -85 },
-              right: { xs: -95 }
-            },
-            '&:before': {
-              content: '""',
-              position: 'absolute',
-              width: 210,
-              height: 210,
-              background: theme.palette.primary[800],
-              borderRadius: '50%',
-              top: { xs: -125 },
-              right: { xs: -15 },
-              opacity: 0.5
-            }
+           
           }}
         >
           <Box sx={{ p: 1 }}>
@@ -88,26 +68,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                       <LocalMallOutlinedIcon fontSize="inherit" />
                     </Avatar>
                   </Grid>
-                  <Grid>
-                    <Button
-                      disableElevation
-                      variant={timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, true)}
-                    >
-                      Shift A
-                    </Button>
-                    <Button
-                      disableElevation
-                      variant={!timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, false)}
-                    >
-                      Shift B
-                    </Button>
-                  </Grid>
+                 
                 </Grid>
               </Grid>
               <Grid sx={{ mb: 0.75 }}>
