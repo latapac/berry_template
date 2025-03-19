@@ -76,19 +76,12 @@ export default function TotalIncomeDarkCard({ isLoading }) {
                     mb: 0.45
                   }}
                   primary={
-                    <Typography variant="h4" sx={{ color: '#fff' }}>
-                      11526
+                    <Typography variant="h4" sx={{ color: '#fff' }} >
+                      Status : <span className='bg-green-500 p-2 ml-14 rounded-md'>Running</span>
                     </Typography>
                   }
                   secondary={
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                      
-
-
-
-
-
-                      
+                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>  
                     </Typography>
                   }
                 />

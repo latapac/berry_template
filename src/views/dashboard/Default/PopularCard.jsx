@@ -25,7 +25,7 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
-export default function PopularCard({ isLoading }) {
+export default function PopularCard({ isLoading,data }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -76,7 +76,7 @@ export default function PopularCard({ isLoading }) {
                 </Grid>
               </Grid>
               <Grid size={12} sx={{ mt: -1 }}>
-                <BajajAreaChartCard />
+                <BajajAreaChartCard data={data} />
               </Grid>
               <Grid size={12}>
                 <Grid container direction="column">

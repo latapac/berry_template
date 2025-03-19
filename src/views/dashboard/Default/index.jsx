@@ -10,8 +10,9 @@ import TotalOrderLineChartCard from './TotalOrderLineChartCard';
 import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';
 import TotalIncomeLightCard from '../../../ui-component/cards/TotalIncomeLightCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
-
+import {getMachineData} from "../../../backservice"
 import { gridSpacing } from 'store/constant';
+
 
 // assets
 import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
@@ -20,32 +21,39 @@ import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
 
 export default function Dashboard() {
   const [isLoading, setLoading] = useState(true);
-
+  const [machineData,setMachineData] = useState({})
+  
+  
   useEffect(() => {
     setLoading(false);
   }, []);
-
+  
+  useEffect(()=>{
+    getMachineData("PAC24250045").then((data)=>{
+        setMachineData(data)
+    })
+  },[])
   return (
     <Grid container spacing={gridSpacing}>
       <Grid size={12}>
         <Grid container spacing={gridSpacing}>
           <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
-            <EarningCard isLoading={isLoading} />
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
           </Grid>
           <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
-            <TotalOrderLineChartCard isLoading={isLoading} />
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
           </Grid>
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
             <Grid container spacing={gridSpacing}>
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
-                <TotalIncomeDarkCard isLoading={isLoading} />
+                <TotalIncomeDarkCard isLoading={isLoading} data={machineData?.d} />
               </Grid>
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
-                <TotalIncomeLightCard
+                <TotalIncomeLightCard  data={machineData?.d}
                   {...{
                     isLoading: isLoading,
-                    total: 11256,
-                    label: 'Total Production',
+                    total: machineData?.d?.Reject_Counters[0],
+                    label: 'Bad Production',
                     icon: <StorefrontTwoToneIcon fontSize="inherit" />
                   }}
                 />
@@ -60,7 +68,7 @@ export default function Dashboard() {
             <TotalGrowthBarChart isLoading={isLoading} />
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
-            <PopularCard isLoading={isLoading} />
+            <PopularCard isLoading={isLoading}  data={machineData?.d}  />
           </Grid>
         </Grid>
       </Grid>
