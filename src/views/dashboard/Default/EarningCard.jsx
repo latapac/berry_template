@@ -148,16 +148,7 @@ export default function EarningCard({ isLoading, data }) {
                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data?.Total_Production[0]}</Typography>
                   </Grid>
                   <Grid>
-                    <Avatar
-                      sx={{
-                        cursor: 'pointer',
-                        ...theme.typography.smallAvatar,
-                        bgcolor: 'secondary.200',
-                        color: 'secondary.dark'
-                      }}
-                    >
-                      <ArrowUpwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
-                    </Avatar>
+                    
                   </Grid>
                 </Grid>
               </Grid>

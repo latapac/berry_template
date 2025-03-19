@@ -37,10 +37,13 @@ export default function Dashboard() {
     <Grid container spacing={gridSpacing}>
       <Grid size={12}>
         <Grid container spacing={gridSpacing}>
-          <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
+          <Grid size={{ lg: 2, md: 6, sm: 6, xs: 12 }}>
             <EarningCard isLoading={isLoading} data={machineData?.d}/>
           </Grid>
-          <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
+          </Grid>
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
             <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
           </Grid>
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
@@ -57,6 +60,7 @@ export default function Dashboard() {
                     icon: <StorefrontTwoToneIcon fontSize="inherit" />
                   }}
                 />
+                
               </Grid>
             </Grid>
           </Grid>

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -20,10 +20,6 @@ function MenuList() {
 
   let [menuItem,setMenuItem] = useState(menuItems)
 
-  getPages().then((data)=>{
-    menuItem.items[1]=data
-    setMenuItem(menuItem)
-  })
 
   const [selectedID, setSelectedID] = useState('');
 
@@ -78,7 +74,19 @@ function MenuList() {
     }
   });
 
+  useEffect(()=>{
+    getPages().then((data)=>{
+      const items = menuItems
+      
+      items.items[1] = data
+      console.log(items);
+      
+      setMenuItem(()=>items)
+      console.log(menuItem);
+    })
+  },[])
+
   return <Box {...(drawerOpen && { sx: { mt: 1.5 } })}>{navItems}</Box>;
 }
 
-export default memo(MenuList);
+export default MenuList;
