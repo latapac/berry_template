@@ -77,8 +77,8 @@ export default function TotalIncomeDarkCard({ isLoading ,data}) {
                     mb: 0.45
                   }}
                   primary={
-                    <Typography variant="h4" sx={{ color: '#fff' }} >
-                      Status : <span className={`${getMstatusBGColor(mstatus[data?.status[0]])} p-2 ml-14 rounded-md`}>{mstatus[data?.status[0]]}</span>
+                    <Typography variant="h4" sx={{ color: '#fff' ,fontWeight: '800'}}>
+                      PAC450046
                     </Typography>
                   }
                   secondary={

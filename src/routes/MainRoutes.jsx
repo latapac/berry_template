@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import AuditTrail from './Audit_Trial';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -37,6 +38,10 @@ const MainRoutes = {
     {
       path: 'typography',
       element: <UtilsTypography />
+    },
+    {
+      path: 'audit',
+      element: <AuditTrail />
     },
     {
       path: 'color',
