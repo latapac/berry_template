@@ -96,18 +96,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid
-                    size={6}
-                    sx={{
-                      '.apexcharts-tooltip.apexcharts-theme-light': {
-                        color: theme.palette.text.primary,
-                        background: theme.palette.background.default,
-                        ...theme.applyStyles('dark', { border: 'none' })
-                      }
-                    }}
-                  >
-                    {timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}
-                  </Grid>
+
                 </Grid>
               </Grid>
             </Grid>
