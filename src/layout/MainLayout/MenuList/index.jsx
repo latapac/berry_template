@@ -10,6 +10,7 @@ import NavGroup from './NavGroup';
 import menuItems from 'menu-items';
 
 import { useGetMenuMaster } from 'api/menu';
+import { getPages } from '../../../menu-items/pages';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
@@ -17,18 +18,25 @@ function MenuList() {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
+  let [menuItem,setMenuItem] = useState(menuItems)
+
+  getPages().then((data)=>{
+    menuItem.items[1]=data
+    setMenuItem(menuItem)
+  })
+
   const [selectedID, setSelectedID] = useState('');
 
   const lastItem = null;
 
-  let lastItemIndex = menuItems.items.length - 1;
+  let lastItemIndex = menuItem.items.length - 1;
   let remItems = [];
   let lastItemId;
 
-  if (lastItem && lastItem < menuItems.items.length) {
-    lastItemId = menuItems.items[lastItem - 1].id;
+  if (lastItem && lastItem < menuItem.items.length) {
+    lastItemId = menuItem.items[lastItem - 1].id;
     lastItemIndex = lastItem - 1;
-    remItems = menuItems.items.slice(lastItem - 1, menuItems.items.length).map((item) => ({
+    remItems = menuItem.items.slice(lastItem - 1, menuItem.items.length).map((item) => ({
       title: item.title,
       elements: item.children,
       icon: item.icon,
@@ -38,7 +46,7 @@ function MenuList() {
     }));
   }
 
-  const navItems = menuItems.items.slice(0, lastItemIndex + 1).map((item, index) => {
+  const navItems = menuItem.items.slice(0, lastItemIndex + 1).map((item, index) => {
     switch (item.type) {
       case 'group':
         if (item.url && item.id !== lastItemId) {
