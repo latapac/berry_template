@@ -1,20 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getAuditTrailData } from '../backservice';
+import { getAlarmData } from '../backservice'; // Assuming a different service for alarm data
 
-function AuditTrail() {
+function AlarmReport() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const serialNumber = queryParams.get('serial_number');
 
-    const [auditData, setAuditData] = useState([]);
+    const [alarmData, setAlarmData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [itemsPerPage, setItemsPerPage] = useState(20);
     const [isPrinting, setIsPrinting] = useState(false);
-    const [lastLoggedInUser, setLastLoggedInUser] = useState('');
     const [highlightedRows, setHighlightedRows] = useState(new Set());
     const [sortOrder, setSortOrder] = useState('desc');
     const [showDateFilter, setShowDateFilter] = useState(false);
@@ -22,11 +21,11 @@ function AuditTrail() {
 
     useEffect(() => {
         const fetchData = () => {
-            getAuditTrailData(serialNumber).then((data) => {
+            getAlarmData(serialNumber).then((data) => { // Replace with your alarm data fetch function
                 const currentTime = new Date().toISOString();
                 
                 const newItems = data.filter(item => {
-                    const itemTime = new Date(item.ts);
+                    const itemTime = new Date(item.trigger_time);
                     const lastTime = new Date(lastFetchTime.current);
                     return itemTime > lastTime;
                 });
@@ -42,31 +41,25 @@ function AuditTrail() {
                 }
 
                 const sortedData = [...data].sort((a, b) => {
-                    const dateA = new Date(a.ts);
-                    const dateB = new Date(b.ts);
+                    const dateA = new Date(a.trigger_time);
+                    const dateB = new Date(b.trigger_time);
                     return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
                 });
 
-                setAuditData(sortedData);
+                setAlarmData(sortedData);
                 
                 let filtered = sortedData;
                 if (startDate && endDate) {
                     const start = new Date(startDate);
                     const end = new Date(endDate);
                     filtered = filtered.filter(item => {
-                        const itemDate = new Date(item.ts);
+                        const itemDate = new Date(item.trigger_time);
                         return itemDate >= start && itemDate <= end;
                     });
                 }
                 setFilteredData(filtered);
                 
                 lastFetchTime.current = currentTime;
-
-                const loginEvents = sortedData.filter(item => item.d?.User && item.d.User[0] !== '');
-                if (loginEvents.length > 0) {
-                    const mostRecentLogin = loginEvents.sort((a, b) => new Date(b.ts) - new Date(a.ts))[0];
-                    setLastLoggedInUser(mostRecentLogin.d.User[0]);
-                }
             });
         };
 
@@ -80,6 +73,7 @@ function AuditTrail() {
     }, [itemsPerPage]);
 
     function formatTimestamp(isoString) {
+        if (!isoString) return 'N/A';
         const date = new Date(isoString);
         return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/` +
             `${date.getDate().toString().padStart(2, '0')} ` +
@@ -95,29 +89,6 @@ function AuditTrail() {
             `${date.getDate().toString().padStart(2, '0')} ` +
             `${date.getHours().toString().padStart(2, '0')}:` +
             `${date.getMinutes().toString().padStart(2, '0')}`;
-    }
-
-    function LogText(key, data) {
-        if (key === "User") {
-            if (data === "") {
-                return `User (${lastLoggedInUser || 'Unknown'}) Logged Out`;
-            } else {
-                return "User (" + data + ") Logged In";
-            }
-        } else {
-            return data;
-        }
-    }
-
-    function alarmdata(data) {
-        return (
-            <>
-                <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data?.d.trigger_time)}</td>
-                <td className="px-2 py-1 text-xs border-b">{"Alarm (" + data?.d.status + ")"}</td>
-                <td className="px-2 py-1 text-xs border-b">{data?.d.message}</td>
-                <td className="px-2 py-1 text-xs border-b">{data?.user?.user || "System"}</td>
-            </>
-        );
     }
 
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -148,17 +119,17 @@ function AuditTrail() {
         <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100">
             <div className="w-full mb-4 flex justify-between items-center no-print">
                 <h1 className="text-2xl font-bold text-gray-800 text-left print:text-center">
-                    Audit Report
+                    Alarm Report
                 </h1>
                 <div className="flex items-center gap-2 relative">
                     <div className="relative">
                         <button
                             onClick={() => setShowDateFilter(!showDateFilter)}
-                            className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-20 h-6"
+                            className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-32 h-6"
                         >
                             {startDate || endDate 
                                 ? `${formatShortDateTime(startDate)} - ${formatShortDateTime(endDate)}`
-                                : 'Filter'}
+                                : 'Date Filter'}
                         </button>
                         {showDateFilter && (
                             <div className="absolute top-8 right-0 z-10 bg-white border border-gray-300 rounded p-2 shadow-md">
@@ -217,7 +188,7 @@ function AuditTrail() {
                 <table className="w-full border-collapse">
                     <thead className="bg-gray-200 text-gray-700">
                         <tr>
-                            {["Date & Time", "Identification", "Text", "User"].map((header) => (
+                            {["Triggered Date & Time", "Recover Date & Time", "Alarm", "User"].map((header) => (
                                 <th key={header} className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">
                                     {header}
                                 </th>
@@ -227,32 +198,23 @@ function AuditTrail() {
                     <tbody className="divide-y divide-gray-200">
                         {dataToPrint.length > 0 ? (
                             dataToPrint.map((data) => {
-                                const firstKey = Object.keys(data?.d || {})[0];
                                 const isHighlighted = highlightedRows.has(data._id) && !isPrinting;
                                 return (
                                     <tr 
                                         key={data._id} 
                                         className={`hover:bg-gray-50 transition-colors ${isHighlighted ? 'animate-glow' : ''}`}
                                     >
-                                        {data?.topic === "parameter_change" ? (
-                                            <>
-                                                <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data?.ts)}</td>
-                                                <td className="px-2 py-1 text-xs border-b">{firstKey || '--'}</td>
-                                                <td className="px-2 py-1 text-xs border-b">{LogText(firstKey, data.d[firstKey]?.[0])}</td>
-                                                <td className="px-2 py-1 text-xs border-b">{data?.d?.User?.[0] || "System"}</td>
-                                            </>
-                                        ) : (
-                                            <>
-                                                {alarmdata(data)}
-                                            </>
-                                        )}
+                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data.trigger_time)}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data.recover_time)}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{"Alarm (" + data.status + "): " + data.message}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{data.user?.user || "System"}</td>
                                     </tr>
                                 );
                             })
                         ) : (
                             <tr>
                                 <td colSpan="4" className="px-2 py-1 text-center text-xs text-gray-500 border-b">
-                                    No matching data found.
+                                    No matching alarms found.
                                 </td>
                             </tr>
                         )}
@@ -270,17 +232,17 @@ function AuditTrail() {
                     <button
                         onClick={() => setCurrentPage(Math.max(currentPage - 1, 0))}
                         disabled={currentPage === 0}
-                        className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-10 h-6 disabled:opacity-50"
+                        className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-20 h-6 disabled:opacity-50"
                     >
-                        ←
+                        Previous
                     </button>
                     <span>Page {currentPage + 1} of {totalPages}</span>
                     <button
                         onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages - 1))}
                         disabled={currentPage >= totalPages - 1}
-                        className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-10 h-6 disabled:opacity-50"
+                        className="p-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-20 h-6 disabled:opacity-50"
                     >
-                        →
+                        Next
                     </button>
                     <label htmlFor="items-per-page" className="text-xs font-medium text-gray-700">Show:</label>
                     <select
@@ -350,7 +312,7 @@ function AuditTrail() {
                         margin: 1cm;
                     }
                     body::before {
-                        content: "Audit Report";
+                        content: "Alarm Report";
                         position: fixed;
                         top: 10px;
                         left: 0;
@@ -377,4 +339,4 @@ function AuditTrail() {
     );
 }
 
-export default AuditTrail;
+export default AlarmReport;

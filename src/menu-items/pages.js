@@ -1,27 +1,27 @@
-import { IconAssembly } from '@tabler/icons-react'
-import { getMachines } from '../backservice'
+import { IconAssembly } from '@tabler/icons-react';
+import { getMachines } from '../backservice';
 
-// constant
+// Define icons
 const icons = {
   IconAssembly
 };
 
+// Fetch machine list dynamically
 export async function getPages() {
-  const data = await getMachines('PAC-DB-001')
-  const childrensItems = data.map((machine) => {
-    return {
-      id: 'login',
-      title: machine.serial_number,
-      type: 'item',
-      url: '/pages/login',
-      target: true
-    }
-  })
+  const data = await getMachines('PAC-DB-001');
 
-  let pages = {
+  const childrensItems = data.map((machine) => ({
+    id: machine.serial_number,
+    title: machine.serial_number,
+    type: 'item',
+    url: `/pages/audit_trail?machine=${machine.serial_number}`, // Redirect to audit_trail with machine ID
+    target: true
+  }));
+
+  return {
     id: 'pages',
     title: 'Pages',
-    icon: icons.IconKey,
+    icon: icons.IconAssembly,
     type: 'group',
     children: [
       {
@@ -33,15 +33,13 @@ export async function getPages() {
       }
     ]
   };
-
-  return pages
-
 }
 
+// Static pages with MAC1234
 const pages = {
   id: 'pages',
   title: 'Pages',
-  icon: icons.IconKey,
+  icon: icons.IconAssembly,
   type: 'group',
   children: [
     {
@@ -50,17 +48,17 @@ const pages = {
       type: 'collapse',
       icon: icons.IconAssembly,
       children: [
-
         {
-          id: 'register',
+          id: 'MAC1234',
           title: 'MAC1234',
           type: 'item',
-          url: '/pages/register',
+          url: '/audit?serial_number=PAC24250045', // Redirects to audit trail page
           target: true
         }
       ]
     }
   ]
 };
+
 
 export default pages;

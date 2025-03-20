@@ -34,23 +34,73 @@ export default function Dashboard() {
     })
   },[])
   return (
+    
+    
     <Grid container spacing={gridSpacing}>
       <Grid size={12}>
         <Grid container spacing={gridSpacing}>
-          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
+          
+          
+
+
+
+
+
+
+
+
+          
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
             <EarningCard isLoading={isLoading} data={machineData?.d}/>
           </Grid>
-          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
-            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
           </Grid>
-          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
-            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
           </Grid>
-          <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
+          </Grid> 
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
+          </Grid>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
+          </Grid>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
+          </Grid>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <EarningCard isLoading={isLoading} data={machineData?.d}/>
+          </Grid> 
+          
+          
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+          {/* <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
             <Grid container spacing={gridSpacing}>
-              <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
+            <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
                 <TotalIncomeDarkCard isLoading={isLoading} data={machineData?.d} />
-              </Grid>
+              </Grid>                        
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
                 <TotalIncomeLightCard  data={machineData?.d}
                   {...{
@@ -60,13 +110,25 @@ export default function Dashboard() {
                     icon: <StorefrontTwoToneIcon fontSize="inherit" />
                   }}
                 />
-                
               </Grid>
             </Grid>
+          </Grid> */}
+          
+          {/* <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
           </Grid>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
+          </Grid>
+
+          <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />
+          </Grid> */}
+
         </Grid>
       </Grid>
-      <Grid size={12}>
+      {/* <Grid size={12}>
         <Grid container spacing={gridSpacing}>
           <Grid size={{ xs: 12, md: 8 }}>
             <TotalGrowthBarChart isLoading={isLoading} />
@@ -75,7 +137,7 @@ export default function Dashboard() {
             <PopularCard isLoading={isLoading}  data={machineData?.d}  />
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

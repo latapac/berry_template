@@ -33,10 +33,11 @@ const dashboard = {
       id: 'audit',
       title: 'Audit Trail',
       type: 'item',
-      url: '/audit',
+      url: '/audit?serial_number=PAC24250046',
       icon: icon.IconNotebook,
       breadcrumbs: false
     }
+
   ]
 };
 
