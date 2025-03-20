@@ -134,7 +134,7 @@ export default function EarningCard({ isLoading, data }) {
                     letterSpacing: 0.5 // Better readability
                   }}
                 >
-                  {data.serial_number.startsWith("PAC")?"CARTONING":"TUBE FILLING"}
+                  {data.serial_number.startsWith("PAC")?"Cartoning":"Tube Filling"}
                 </Typography>
                 <Typography 
                   sx={{ 
