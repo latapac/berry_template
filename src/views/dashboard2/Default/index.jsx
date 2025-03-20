@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';  // Importing React hooks for state
 import Grid from '@mui/material/Grid2';  // Importing Grid component from MUI for layout management
 
 // project imports
-import EarningCard from './EarningCard';  // Card showing earning statistics
 import PopularCard from './PopularCard';  // Card showing popular items/data
 import TotalOrderLineChartCard from './TotalOrderLineChartCard';  // Card with line chart for orders
 import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';  // Dark-themed income card
@@ -15,7 +14,7 @@ import { gridSpacing } from 'store/constant';  // Constant for consistent grid s
 import { useLocation } from 'react-router';
 
 // assets
-import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';  // Icon for store/warehouse
+
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -62,9 +61,9 @@ export default function Dashboard() {
                   data={machineData?.d}
                   {...{
                     isLoading: isLoading,
-                    total: machineData?.d?.Reject_Counters[0],  // Show reject count
-                    label: 'Bad Production',  // Card label
-                    icon: <StorefrontTwoToneIcon fontSize="inherit" />  // Store icon
+                    total: machineData?.d?.Batch_Number[0],  // Show reject count
+                    label: 'Batch Number',  // Card label
+                    
                   }}
                 />
               </Grid>
