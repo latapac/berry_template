@@ -75,11 +75,11 @@ export default function TotalOrderLineChartCard({ isLoading ,Count , name}) {
                 <Grid container sx={{ alignItems: 'center' }}>
                   <Grid size={6}>
                     <Grid container sx={{ alignItems: 'center' }}>
-                      <Grid>
+                      <Grid sx={{}}>
                         {timeValue ? (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{Count}</Typography>
+                          <Typography sx={{ fontSize: '1rem', fontWeight: 500, width: '60vh' }}>{Count}</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500}}>{Count}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, width: '60vh'}}>{Count}</Typography>
                         )}
                       </Grid>
                       
@@ -88,7 +88,8 @@ export default function TotalOrderLineChartCard({ isLoading ,Count , name}) {
                           sx={{
                             fontSize: '1rem',
                             fontWeight: 500,
-                            color: 'primary.200'
+                            color: 'primary.200',
+                            marginLeft: '6vh'
                           }}
                         >
                         {name}

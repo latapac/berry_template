@@ -1,10 +1,12 @@
 // assets
 import { IconDashboard } from '@tabler/icons-react';
 import { IconNotebook } from '@tabler/icons-react';
+import { IconAlarm } from '@tabler/icons-react';
 
 // constant
 const icons = { IconDashboard };
 const icon = { IconNotebook };
+const icona = { IconAlarm };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -58,7 +60,7 @@ const dashboard = {
       title: 'Alarm',
       type: 'item',
       url: '/alarm?serial_number=PAC24250046',
-      icon: icon.IconNotebook,
+      icon: icona.IconAlarm,
       breadcrumbs: false
     }
 
