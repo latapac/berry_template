@@ -44,13 +44,13 @@ export default function Dashboard() {
       <Grid size={12}>  {/* First row taking full width */}
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
         <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Orders line chart */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]} name="GOOD PRODUCTION" />  {/* Orders line chart */}
           </Grid>
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Orders line chart */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Reject_Counters[0]} name="BAD PRODUCTION"/>  {/* Orders line chart */}
           </Grid>
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* Second orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Duplicate orders chart */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Total_Production[0]} name="TOTAL PRODUCTION"/>  {/* Duplicate orders chart */}
           </Grid>
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>  {/* Income cards column */}
             <Grid container spacing={gridSpacing}>  {/* Nested container for income cards */}

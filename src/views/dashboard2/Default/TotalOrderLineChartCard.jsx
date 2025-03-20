@@ -22,7 +22,7 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-export default function TotalOrderLineChartCard({ isLoading ,data}) {
+export default function TotalOrderLineChartCard({ isLoading ,Count , name}) {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = React.useState(false);
@@ -77,9 +77,9 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                     <Grid container sx={{ alignItems: 'center' }}>
                       <Grid>
                         {timeValue ? (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{data?.Good_Count[0]}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{Count}</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500}}>{data?.Good_Count[0]}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500}}>{Count}</Typography>
                         )}
                       </Grid>
                       
@@ -91,7 +91,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                             color: 'primary.200'
                           }}
                         >
-                         Production
+                        {name}
                         </Typography>
                       </Grid>
                     </Grid>
