@@ -13,6 +13,8 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
 import { getMachineData } from '../../../backservice';
 import { useNavigate } from 'react-router';
+import { mstatus , getMstatusBGColor} from '../../../constants';
+
 
 export default function EarningCard({ isLoading, data }) {
   
@@ -92,8 +94,8 @@ export default function EarningCard({ isLoading, data }) {
                   }}
                 >
                   <Grid>
-                  <Typography variant="h3" gutterBottom>
-                   Line No 7
+                  <Typography variant="h3"  gutterBottom>
+                   <span className={getMstatusBGColor(mstatus[machineData?.d?.status[0]])}>{mstatus[machineData?.d?.status[0]]}</span>
                   </Typography> 
                   </Grid>
                   <Grid>
@@ -132,7 +134,7 @@ export default function EarningCard({ isLoading, data }) {
                     letterSpacing: 0.5 // Better readability
                   }}
                 >
-                  {data?.machineName || 'Tube Filling'}
+                  {data.serial_number.startsWith("PAC")?"CARTONING":"TUBE FILLING"}
                 </Typography>
                 <Typography 
                   sx={{ 
