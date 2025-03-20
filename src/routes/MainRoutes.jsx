@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+
 
 // project imports
 import MainLayout from 'layout/MainLayout';
@@ -13,15 +13,15 @@ import Protected from './AuthLayout';
 
 
 // dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
+import DashboardDefault from 'views/dashboard/Default'
 
 // utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
+import UtilsTypography from 'views/utilities/Typography'
+import UtilsColor from 'views/utilities/Color'
+import UtilsShadow from 'views/utilities/Shadow'
 
 // sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+import SamplePage from 'views/sample-page'
 
 // ==============================|| MAIN ROUTING ||============================== //
 
