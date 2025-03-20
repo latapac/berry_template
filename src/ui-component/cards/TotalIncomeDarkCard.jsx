@@ -8,8 +8,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { mstatus } from '../../constants';
-import {getMstatusBGColor} from '../../constants';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
@@ -26,7 +24,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
  
 }));
 
-export default function TotalIncomeDarkCard({ isLoading ,data}) {
+export default function TotalIncomeDarkCard({ isLoading ,data ,Speed}) {
   const theme = useTheme();
 
   return (
@@ -55,15 +53,18 @@ export default function TotalIncomeDarkCard({ isLoading ,data}) {
                   sx={{
                     py: 0,
                     mt: 0.45,
-                    mb: 0.45
+                    mb: 5
                   }}
                   primary={
                     <Typography variant="h3" sx={{ color: '#fff' ,fontWeight: '800' ,textAlign:"end"}}>
-                      Line 3 - {data}
+                      Line 3 : {data}
                     </Typography>
+                    
+
                   }
                   secondary={
-                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>  
+                    <Typography variant="h3" sx={{ color: '#fff' ,fontWeight: '800' ,textAlign:"end", pt: '3vh'}}>
+                      Speed : {Speed} 
                     </Typography>
                   }
                 />

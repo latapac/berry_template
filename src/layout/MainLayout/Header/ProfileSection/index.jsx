@@ -27,7 +27,7 @@ import useConfig from 'hooks/useConfig';
 import { useDispatch } from 'react-redux';
 
 // assets
-import User1 from 'assets/images/users/user-round.svg';
+import User1 from 'assets/images/users/blue.webp';
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { logout } from '../../../../store/authslice';
 import { useNavigate } from 'react-router';
