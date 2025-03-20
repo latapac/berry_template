@@ -7,7 +7,8 @@ import { IconAlarm } from '@tabler/icons-react';
 const icons = { IconDashboard };
 const icon = { IconNotebook };
 const icona = { IconAlarm };
-
+const iconi = { IconNotebook };
+const iconb = { IconAlarm };
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
@@ -45,6 +46,22 @@ const dashboard = {
       type: 'item',
       url: '/Production',
       icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
+      id: 'default',
+      title: 'Audit2',
+      type: 'item',
+      url: '/Audit2',
+      icon: iconi.IconNotebook,
+      breadcrumbs: false
+    },
+    {
+      id: 'default',
+      title: 'Active_alarm',
+      type: 'item',
+      url: '/Active_alarm',
+      icon: iconb.IconAlarm,
       breadcrumbs: false
     },
     {

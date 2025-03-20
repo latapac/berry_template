@@ -9,7 +9,8 @@ import OEE from '../views/OEE/Default';
 import Production from '../views/Production/Default';
 import AlarmReport from './Alarm';
 import Protected from './AuthLayout';
-
+import Audit2 from '../views/Audit2/Default';
+import Active_alarm from '../views/Active_alarm/Default';
 
 
 // dashboard routing
@@ -49,6 +50,14 @@ const MainRoutes = {
     {
       path: 'OEE',
       element: <OEE />
+    },
+    {
+      path: 'Audit2',
+      element: <Audit2 />
+    },
+    {
+      path: 'Active_alarm',
+      element: <Active_alarm />
     },
     {
       path: 'Production',
