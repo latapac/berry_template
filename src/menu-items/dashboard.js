@@ -35,7 +35,7 @@ const dashboard = {
       id: 'default',
       title: 'OEE',
       type: 'item',
-      url: '/OEE',
+      url: '/OEE?serial_number=PAC24250046',
       icon: icons.IconDashboard,
       breadcrumbs: false
     },
