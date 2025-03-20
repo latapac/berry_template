@@ -9,28 +9,28 @@ import Chip from '@mui/material/Chip';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid2';
-import InputAdornment from '@mui/material/InputAdornment';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import { logoutService } from '../../../../backservice';
 // project imports
-import UpgradePlanCard from './UpgradePlanCard';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import useConfig from 'hooks/useConfig';
+import { useDispatch } from 'react-redux';
 
 // assets
-import User1 from 'assets/images/users/blue.webp';
-import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-react';
+import User1 from 'assets/images/users/user-round.svg';
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
+import { logout } from '../../../../store/authslice';
+import { useNavigate } from 'react-router';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -42,6 +42,8 @@ export default function ProfileSection() {
   const [notification, setNotification] = useState(false);
   const [selectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   /**
    * anchorRef is used on different components and specifying one type leads to other components throwing an error
@@ -60,6 +62,13 @@ export default function ProfileSection() {
     setOpen(false);
   };
 
+  function handleLogout(){
+    logoutService()
+    dispatch(logout())
+    navigate("/pages/login")
+    
+  }
+
   const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -68,6 +77,7 @@ export default function ProfileSection() {
 
     prevOpen.current = open;
   }, [open]);
+
 
   return (
     <>
@@ -226,11 +236,11 @@ export default function ProfileSection() {
                             }
                           />
                         </ListItemButton>
-                        <ListItemButton sx={{ borderRadius: `${borderRadius}px` }} selected={selectedIndex === 4}>
+                        <ListItemButton onClick={handleLogout} sx={{ borderRadius: `${borderRadius}px` }} selected={selectedIndex === 4}>
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="20px" />
                           </ListItemIcon>
-                          <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                          <ListItemText  primary={<Typography variant="body2">Logout</Typography>} />
                         </ListItemButton>
                       </List>
                     </Box>

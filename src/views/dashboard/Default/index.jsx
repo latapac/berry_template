@@ -7,20 +7,26 @@ import Grid from '@mui/material/Grid2';
 import EarningCard from './EarningCard';
 import {  getMachines } from "../../../backservice"
 import { gridSpacing } from 'store/constant';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
   const [isLoading, setLoading] = useState(true);
   const [machineData, setMachineData] = useState([])
+
+  const userData = useSelector((state) => state.authSlice.userData);
 
   useEffect(() => {
     setLoading(false);
   }, []);
 
   useEffect(() => {
-   getMachines("PAC-DB-001").then((data)=>{
+    if (userData?.c_id) {
+      getMachines(userData?.c_id).then((data)=>{
     
-    setMachineData(data)
-   })
+        setMachineData(data)
+       })
+    }
+  
   }, [])
   return (
 
