@@ -30,6 +30,22 @@ const dashboard = {
       breadcrumbs: false
     },
     {
+      id: 'default',
+      title: 'OEE',
+      type: 'item',
+      url: '/OEE',
+      icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
+      id: 'default',
+      title: 'Production',
+      type: 'item',
+      url: '/Production',
+      icon: icons.IconDashboard,
+      breadcrumbs: false
+    },
+    {
       id: 'audit',
       title: 'Audit Trail',
       type: 'item',

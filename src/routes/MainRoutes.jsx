@@ -5,6 +5,9 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AuditTrail from './Audit_Trial';
 import Dashboard from '../views/dashboard2/Default';
+import OEE from '../views/OEE/Default';
+import Production from '../views/Production/Default';
+
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -39,6 +42,14 @@ const MainRoutes = {
     {
       path: 'typography',
       element: <UtilsTypography />
+    },
+    {
+      path: 'OEE',
+      element: <OEE />
+    },
+    {
+      path: 'Production',
+      element: <Production/>
     },
     {
       path: 'audit',
