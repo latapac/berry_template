@@ -8,6 +8,8 @@ import Dashboard from '../views/dashboard2/Default';
 import OEE from '../views/OEE/Default';
 import Production from '../views/Production/Default';
 import AlarmReport from './Alarm';
+import Protected from './AuthLayout';
+
 
 
 // dashboard routing
@@ -25,7 +27,7 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 const MainRoutes = {
   path: '/',
-  element: <MainLayout />,
+  element: <Protected><MainLayout /></Protected>,
   children: [
     {
       path: '/',
