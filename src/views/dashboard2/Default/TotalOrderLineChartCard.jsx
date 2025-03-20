@@ -20,7 +20,7 @@ import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 
 export default function TotalOrderLineChartCard({ isLoading ,data}) {
   const theme = useTheme();
@@ -80,7 +80,7 @@ export default function TotalOrderLineChartCard({ isLoading ,data}) {
                           <Typography sx={{ fontSize: '2.125rem', fontWeight: 500 }}>{data?.Good_Count[0]}</Typography>
                         ) : (
                           <Typography sx={{ fontSize: '2.125rem', fontWeight: 500}}>{data?.Good_Count[0]}</Typography>
-                        )}
+                        )  }
                       </Grid>
                       
                       <Grid size={12}>

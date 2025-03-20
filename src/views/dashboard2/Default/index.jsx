@@ -39,8 +39,8 @@ export default function Dashboard() {
     <Grid container spacing={gridSpacing}>  {/* Outer container for entire dashboard */}
       <Grid size={12}>  {/* First row taking full width */}
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
-          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* Earnings card column */}
-            <EarningCard isLoading={isLoading} data={machineData?.d}/>  {/* Display earnings */}
+          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
+            <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Orders line chart */}
           </Grid>
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
             <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Orders line chart */}
@@ -58,8 +58,8 @@ export default function Dashboard() {
                   data={machineData?.d}
                   {...{
                     isLoading: isLoading,
-                    total: machineData?.d?.Reject_Counters[0],  // Show reject count
-                    label: 'Bad Production',  // Card label
+                    total: machineData?.d?.Batch_Number[0],  // Show reject count
+                    label: 'Batch Number',  // Card label
                     icon: <StorefrontTwoToneIcon fontSize="inherit" />  // Store icon
                   }}
                 />
