@@ -33,7 +33,7 @@ export default function Dashboard() {
     <Grid container spacing={gridSpacing}>
       <Grid size={12}>
         <Grid container spacing={gridSpacing}>
-          {machineData.map((data) => {
+          {machineData && machineData?.map((data) => {
             return (
               <Grid size={{ lg: 3, md: 6, sm: 6, xs: 12 }}>
                 <EarningCard isLoading={isLoading} data={data} />
