@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getAlarmData } from '../backservice'; // Assuming a different service for alarm data
+import { getAuditTrailData } from '../backservice'; // Assuming a different service for alarm data
 
 function AlarmReport() {
     const location = useLocation();
@@ -21,48 +21,57 @@ function AlarmReport() {
 
     useEffect(() => {
         const fetchData = () => {
-            getAlarmData(serialNumber).then((data) => { // Replace with your alarm data fetch function
+            getAuditTrailData(serialNumber).then((data) => {
                 const currentTime = new Date().toISOString();
                 
-                const newItems = data.filter(item => {
-                    const itemTime = new Date(item.trigger_time);
+                // Filter alarm items and check data structure
+                const alarmItems = data.filter(item => 
+                    item.topic === "alarm" && item.d && item.d.trigger_time
+                );
+                
+                // Find new alarms
+                const newItems = alarmItems.filter(item => {
+                    const itemTime = new Date(item.d.trigger_time);
                     const lastTime = new Date(lastFetchTime.current);
                     return itemTime > lastTime;
                 });
-
+    
+                // Highlight new items
                 if (newItems.length > 0) {
                     const newHighlighted = new Set();
                     newItems.forEach(item => newHighlighted.add(item._id));
                     setHighlightedRows(newHighlighted);
-
+    
                     setTimeout(() => {
                         setHighlightedRows(new Set());
                     }, 60000);
                 }
-
-                const sortedData = [...data].sort((a, b) => {
-                    const dateA = new Date(a.trigger_time);
-                    const dateB = new Date(b.trigger_time);
+    
+                // Sort alarm items
+                const sortedData = [...alarmItems].sort((a, b) => {
+                    const dateA = new Date(a.d.trigger_time);
+                    const dateB = new Date(b.d.trigger_time);
                     return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
                 });
-
+    
                 setAlarmData(sortedData);
                 
+                // Apply date filtering
                 let filtered = sortedData;
                 if (startDate && endDate) {
                     const start = new Date(startDate);
                     const end = new Date(endDate);
                     filtered = filtered.filter(item => {
-                        const itemDate = new Date(item.trigger_time);
+                        const itemDate = new Date(item.d.trigger_time);
                         return itemDate >= start && itemDate <= end;
                     });
                 }
-                setFilteredData(filtered);
                 
+                setFilteredData(filtered);
                 lastFetchTime.current = currentTime;
             });
         };
-
+    
         fetchData();
         const intervalId = setInterval(fetchData, 4000);
         return () => clearInterval(intervalId);
@@ -73,6 +82,8 @@ function AlarmReport() {
     }, [itemsPerPage]);
 
     function formatTimestamp(isoString) {
+        console.log(isoString);
+        
         if (!isoString) return 'N/A';
         const date = new Date(isoString);
         return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/` +
@@ -204,9 +215,9 @@ function AlarmReport() {
                                         key={data._id} 
                                         className={`hover:bg-gray-50 transition-colors ${isHighlighted ? 'animate-glow' : ''}`}
                                     >
-                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data.trigger_time)}</td>
-                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data.recover_time)}</td>
-                                        <td className="px-2 py-1 text-xs border-b">{"Alarm (" + data.status + "): " + data.message}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data?.d.trigger_time)}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{formatTimestamp(data?.d.recover_time)}</td>
+                                        <td className="px-2 py-1 text-xs border-b">{data?.d.message+" ("+data?.d.status+")"}</td>
                                         <td className="px-2 py-1 text-xs border-b">{data.user?.user || "System"}</td>
                                     </tr>
                                 );

@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router';
 export default function EarningCard({ isLoading, data }) {
   
   const [machineData,setMachineData] = useState({})
-  
 
   const navigate = useNavigate()
 

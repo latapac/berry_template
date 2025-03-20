@@ -7,6 +7,7 @@ import AuditTrail from './Audit_Trial';
 import Dashboard from '../views/dashboard2/Default';
 import OEE from '../views/OEE/Default';
 import Production from '../views/Production/Default';
+import AlarmReport from './Alarm';
 
 
 // dashboard routing
@@ -70,6 +71,10 @@ const MainRoutes = {
     {
       path: '/sample-page',
       element: <SamplePage />
+    },
+    {
+      path: '/alarm',
+      element: <AlarmReport />
     }
   ]
 };

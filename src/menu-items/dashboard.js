@@ -52,7 +52,16 @@ const dashboard = {
       url: '/audit?serial_number=PAC24250046',
       icon: icon.IconNotebook,
       breadcrumbs: false
+    },
+    {
+      id: 'alarm',
+      title: 'Alarm',
+      type: 'item',
+      url: '/alarm?serial_number=PAC24250046',
+      icon: icon.IconNotebook,
+      breadcrumbs: false
     }
+
 
   ]
 };
