@@ -41,7 +41,7 @@ export default function BajajAreaChartCard({data}) {
             </Grid>
             <Grid>
               <Typography variant="h4" sx={{ color: 'grey.800' }}>
-              {data?.current_OEE[0].toFixed(2)}%
+              {Number(data?.current_OEE[0]).toFixed(2)}%
               </Typography>
             </Grid>
           </Grid>
