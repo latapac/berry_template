@@ -1,16 +1,16 @@
-export const mstatus = ['ABORTED', 'STOPPED', 'RESETTING', 'IDLE', 'EXECUTE'];
+export const mstatus = ['Aborted', 'Stopped', 'Reseting', 'Idle', 'Execute'];
 
 export function getMstatusBGColor(status) {
     switch (status) {
         case 'STOP':
             return 'text-red-500';
-        case 'RESETTING':
+        case 'Reseting':
             return 'text-yellow-500';
-        case 'IDLE':
+        case 'Idle':
             return 'text-green-500';
-        case 'EXECUTE':
+        case 'Execute':
             return 'text-green-700';
-        case 'ABORTED':
+        case 'Aborted':
             return 'text-orange-400';
         default:
             return 'text-gray-500';
