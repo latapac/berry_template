@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -41,7 +41,7 @@ export default function BajajAreaChartCard({data}) {
             </Grid>
             <Grid>
               <Typography variant="h4" sx={{ color: 'grey.800' }}>
-              {data?.current_OEE[0]}
+              {Number(data?.current_OEE[0]).toFixed(2)}%
               </Typography>
             </Grid>
           </Grid>
