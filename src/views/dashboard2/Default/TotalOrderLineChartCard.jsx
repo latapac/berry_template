@@ -67,13 +67,16 @@ export default function TotalOrderLineChartCard({ isLoading ,Count , name}) {
                         )}
                       </Grid>
                       
-                      <Grid size={12}>
+                      <Grid size={12} sx={{paddingTop:"2vh"}}>
                         <Typography
                           sx={{
                             fontSize: '1rem',
                             fontWeight: 500,
                             color: 'primary.200',
-                            marginLeft: '6vh'
+                            position: 'absolute',
+                            bottom: 0,
+
+                            
                           }}
                         >
                         {name}
