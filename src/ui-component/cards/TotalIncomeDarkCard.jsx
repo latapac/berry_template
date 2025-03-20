@@ -59,7 +59,7 @@ export default function TotalIncomeDarkCard({ isLoading ,data}) {
                   }}
                   primary={
                     <Typography variant="h3" sx={{ color: '#fff' ,fontWeight: '800' ,textAlign:"end"}}>
-                      Line 3 - PAC450046
+                      Line 3 {data}
                     </Typography>
                   }
                   secondary={
