@@ -1,6 +1,6 @@
 export const mstatus = ['ABORTED', 'STOPPED', 'RESETTING', 'IDLE', 'EXECUTE'];
 
-export function getMstatusTextColor(status) {
+export function getMstatusBGColor(status) {
     switch (status) {
         case 'STOP':
             return 'text-red-500';

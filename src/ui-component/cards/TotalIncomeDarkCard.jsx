@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { mstatus } from '../../constants';
-import {getMstatusTextColor} from '../../constants';
+import {getMstatusBGColor} from '../../constants';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
@@ -58,13 +58,8 @@ export default function TotalIncomeDarkCard({ isLoading ,data}) {
                     mb: 0.45
                   }}
                   primary={
-<<<<<<< HEAD
-                    <Typography variant="h3" sx={{ color: '#fff' ,fontWeight: '800' ,textAlign:"end"}} >
-                      <p className=''> Line 3 - PAC450046</p>
-=======
                     <Typography variant="h3" sx={{ color: '#fff' ,fontWeight: '800' ,textAlign:"end"}}>
-                      Line 3 {data}
->>>>>>> 19af57020a636ecf758674eb4f8c03eba58830cb
+                      Line 3 - PAC450046
                     </Typography>
                   }
                   secondary={
