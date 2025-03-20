@@ -144,7 +144,7 @@ export default function EarningCard({ isLoading, data }) {
                     opacity: 0.9 // Slightly faded for hierarchy
                   }}
                 >
-                  Model: {data?.model || 'Mac300'}
+                  Model: {data.serial_number.startsWith("PAC")?"PAC300":"MAC300"}
                 </Typography>
                 <Typography 
                   sx={{ 
