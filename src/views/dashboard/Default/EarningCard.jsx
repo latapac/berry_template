@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
-import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid2';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CircleIcon from '@mui/icons-material/Circle'; // Status indicator
@@ -15,36 +11,60 @@ import CircleIcon from '@mui/icons-material/Circle'; // Status indicator
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonEarningCard from 'ui-component/cards/Skeleton/EarningCard';
-
-// assets
-import EarningIcon from 'assets/images/icons/earning.svg';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import GetAppTwoToneIcon from '@mui/icons-material/GetAppOutlined';
-import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
-import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
-import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
+import { getMachineData } from '../../../backservice';
+import { useNavigate } from 'react-router';
 
 export default function EarningCard({ isLoading, data }) {
+  
+  const [machineData,setMachineData] = useState({})
+  
+
+  const navigate = useNavigate()
+
+  function formatTimestamp(isoString) {
+    const date = new Date(isoString);
+
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return ` ${year}/${month + 1}/${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+  const dataChange = (tp) => {
+
+    if (tp === undefined) {
+      return false;
+    }
+    const date = new Date(tp);
+    const currentTime = new Date();
+    const differenceInMilliseconds = currentTime - date;
+    const isChanged = differenceInMilliseconds > 60000;
+
+   return !isChanged
+  };
+
+  useEffect(()=>{
+    if (data) {
+      getMachineData(data.serial_number).then((data)=>{
+        setMachineData(data)
+      })
+    }
+  })
+  
   const theme = useTheme();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <>
       {isLoading ? (
         <SkeletonEarningCard />
       ) : (
         <MainCard
+        onClick={()=>{navigate("/dash?serial_number="+machineData?.serial_number)}}
           border={false}
           content={false}
-          aria-hidden={Boolean(anchorEl)}
           sx={{
             bgcolor: 'primary.light ',
             background: `linear-gradient(135deg, ${theme.palette.grey[50]} 0%, ${theme.palette.grey[50]  } 100%)`, // Gradient background
@@ -85,82 +105,21 @@ export default function EarningCard({ isLoading, data }) {
                           display: 'flex',
                           alignItems: 'center',
                           gap: 0.5,
-                          bgcolor: data?.isOnline ? 'success.main' : 'error.main',
+                          bgcolor:dataChange(formatTimestamp(machineData?.ts)) ? 'success.main' : 'error.main',
                           borderRadius: 2,
                           px: 1,
                           py: 0.5,
                           boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
                         }}
                       >
-                        <CircleIcon sx={{ fontSize: '1rem', color: '#fff' }} />
+                        <CircleIcon sx={{ fontSize: '1rem', color:'#fff' }} />
                         <Typography variant="caption" sx={{ color: '#fff', fontWeight: 600 }}>
-                          {data?.isOnline ? 'Online' : 'Offline'}
+                          {dataChange(formatTimestamp(machineData?.ts))? 'Online' : 'Offline'}
                         </Typography>
                       </Box>
-                      {/* Reinstated Menu Button */}
-                      {/* <Avatar
-                        variant="rounded"
-                        sx={{
-                          ...theme.typography.commonAvatar,
-                          ...theme.typography.mediumAvatar,
-                          bgcolor: 'rgba(255, 255, 255, 0.1)', // Semi-transparent white
-                          color: '#fff',
-                          zIndex: 1,
-                          '&:hover': {
-                            bgcolor: 'rgba(255, 255, 255, 0.2)' // Hover effect
-                          }
-                        }}
-                        aria-controls="menu-earning-card"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                      >
-                        <MoreHorizIcon fontSize="inherit" />
-                      </Avatar> */}
+                    
                     </Box>
-                    {/* Styled Menu */}
-                    {/* <Menu
-                      id="menu-earning-card"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                      variant="selectedMenu"
-                      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                      sx={{
-                        '& .MuiPaper-root': {
-                          bgcolor: 'grey.900', // Dark menu background
-                          color: '#fff',
-                          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-                          borderRadius: 1
-                        }
-                      }}
-                    >
-                      <MenuItem 
-                        onClick={handleClose}
-                        sx={{ '&:hover': { bgcolor: 'grey.800' } }} // Hover effect
-                      >
-                        <GetAppTwoToneIcon sx={{ mr: 1.75, color: 'secondary.main' }} /> Import Card
-                      </MenuItem>
-                      <MenuItem 
-                        onClick={handleClose}
-                        sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-                      >
-                        <FileCopyTwoToneIcon sx={{ mr: 1.75, color: 'secondary.main' }} /> Copy Data
-                      </MenuItem>
-                      <MenuItem 
-                        onClick={handleClose}
-                        sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-                      >
-                        <PictureAsPdfTwoToneIcon sx={{ mr: 1.75, color: 'secondary.main' }} /> Export
-                      </MenuItem>
-                      <MenuItem 
-                        onClick={handleClose}
-                        sx={{ '&:hover': { bgcolor: 'grey.800' } }}
-                      >
-                        <ArchiveTwoToneIcon sx={{ mr: 1.75, color: 'secondary.main' }} /> Archive File
-                      </MenuItem>
-                    </Menu> */}
+                  
                   </Grid>
                 </Grid>
               </Grid>
@@ -194,21 +153,9 @@ export default function EarningCard({ isLoading, data }) {
                     opacity: 0.9
                   }}
                 >
-                  Serial No: {data?.serialNumber || 'MAC/24-25/0045'}
+                  Serial No: {data?.serial_number || 'N/A'}
                 </Typography>
-                {/* <Typography
-                  sx={{
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    color: data?.isOnline ? 'success.light' : 'error.light', // Lighter shades for contrast
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 0.5
-                  }}
-                >
-                  <CircleIcon sx={{ fontSize: '0.75rem' }} />
-                  Status: {data?.isOnline ? 'Online' : 'Offline'}
-                </Typography> */}
+              
               </Grid>
             </Grid>
           </Box>

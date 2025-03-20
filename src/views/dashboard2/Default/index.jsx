@@ -12,6 +12,7 @@ import TotalIncomeLightCard from '../../../ui-component/cards/TotalIncomeLightCa
 import TotalGrowthBarChart from './TotalGrowthBarChart';  // Bar chart showing growth metrics
 import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 import { gridSpacing } from 'store/constant';  // Constant for consistent grid spacing
+import { useLocation } from 'react-router';
 
 // assets
 import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';  // Icon for store/warehouse
@@ -19,17 +20,20 @@ import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';  // I
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 export default function Dashboard() {
-  const [isLoading, setLoading] = useState(true);  // State to track loading status
-  const [machineData, setMachineData] = useState({});  // State to store machine data from API
-  
-  // Effect to immediately set loading to false when component mounts
+  const [isLoading, setLoading] = useState(true);  
+  const [machineData, setMachineData] = useState({}); 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const serialNumber = queryParams.get('serial_number');
+
+ 
   useEffect(() => {
     setLoading(false);
   }, []);
   
-  // Effect to fetch machine data when component mounts
+  
   useEffect(() => {
-    getMachineData("PAC24250045").then((data) => {  // Fetch data for specific machine ID
+    getMachineData(serialNumber).then((data) => {  // Fetch data for specific machine ID
       setMachineData(data);  // Update state with fetched data
     });
   }, []);
@@ -51,7 +55,7 @@ export default function Dashboard() {
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>  {/* Income cards column */}
             <Grid container spacing={gridSpacing}>  {/* Nested container for income cards */}
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Dark income card */}
-                <TotalIncomeDarkCard isLoading={isLoading} data={machineData?.d} />  {/* Dark theme income */}
+                <TotalIncomeDarkCard isLoading={isLoading} data={serialNumber} />  {/* Dark theme income */}
               </Grid>
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Light income card */}
                 <TotalIncomeLightCard  // Light theme income showing bad production

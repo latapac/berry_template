@@ -79,10 +79,9 @@ function MenuList() {
       const items = menuItems
       
       items.items[1] = data
-      console.log(items);
-      
+  
       setMenuItem(()=>items)
-      console.log(menuItem);
+
     })
   },[])
 
