@@ -10,15 +10,15 @@ export default function Dashboard() {
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedShift, setSelectedShift] = useState('Shift A');
-  const [shiftData,setShiftData] = useState({shiftLengthHours: 8,
-    shortBreaksCount: 2,
-    shortBreaksMinutesEach: 15,
-    mealBreakCount: 1,
-    mealBreakMinutesEach: 60,
-    downTime: 30,
-    idealRunRate: 300,
-    totalProducts: 100000,
-    rejectProducts: 10000})
+  const [shiftData,setShiftData] = useState({shiftLengthHours: 0,
+    shortBreaksCount: 0,
+    shortBreaksMinutesEach: 0,
+    mealBreakCount: 0,
+    mealBreakMinutesEach: 0,
+    downTime: 0,
+    idealRunRate: 0,
+    totalProducts: 0,
+    rejectProducts: 0})
   const [isPrinting, setIsPrinting] = useState(false);
 
   // Updated state variables with your example values
@@ -27,6 +27,11 @@ export default function Dashboard() {
   const [productionLine] = useState('Line 1');
   const [shiftDetails, setShiftDetails] = useState('Shift A - Day');
   const [targetVsActual] = useState('120,000 vs 100,000');
+  const shiftDetailNum = {
+    'Shift A':0,
+    'Shift B':1,
+    'Shift C':2
+  }
 
   // Update shiftDetails whenever selectedShift changes
   useEffect(() => {
@@ -47,9 +52,9 @@ export default function Dashboard() {
   };
 
 
-  const shiftLengthMinutes = shiftData.shiftLengthHours * 60;
-  const shortBreaksTotal = shiftData.shortBreaksCount * shiftData.shortBreaksMinutesEach;
-  const mealBreakTotal = shiftData.mealBreakCount * shiftData.mealBreakMinutesEach;
+  const shiftLengthMinutes = shiftData?.shiftLengthHours * 60;
+  const shortBreaksTotal = shiftData?.shortBreaksCount * shiftData.shortBreaksMinutesEach;
+  const mealBreakTotal = shiftData?.mealBreakCount * shiftData.mealBreakMinutesEach;
 
   const productionData = [
     { metric: "Shift Length", calculation: `${shiftData.shiftLengthHours} Hours × 60`, result: `${shiftLengthMinutes} Minutes` },
@@ -91,12 +96,12 @@ export default function Dashboard() {
   ];
 
   useEffect(()=>{
-    console.log(serialNumber);
-    getoee(serialNumber).then((data)=>{
-      console.log(data);
+    getoee(serialNumber,selectedDate,shiftDetailNum[selectedShift]).then((data)=>{
+      if (data) {
+        setShiftData(data[0].d)
+      }
     })
-  },[])
-
+  },[selectedShift,selectedDate])
   return (
     <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100">
       <div className="w-full mb-4 flex justify-between items-center no-print">

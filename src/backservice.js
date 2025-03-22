@@ -101,10 +101,20 @@ export async function getAuditTrailData(mid) {
 
 
 
-export async function getoee(mid) {
+export async function getoee(mid,date,shifttime) {
+    console.log(date,shifttime);
+    
     try {
-        const response = await fetch("http://"+server+":3000/getoee/"+mid);
-        console.log("http://"+server+":3000/getoee/"+mid);
+        console.log('http://'+server+':3000/getoee/'+mid);
+        
+        const response = await fetch('http://'+server+':3000/getoee/'+mid, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+               date:date,
+               shifttime:shifttime
+            })
+      })
         
         if (!response.ok) {
             throw new Error('Network response was not ok');
