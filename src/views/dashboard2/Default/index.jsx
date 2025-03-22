@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';  // Importing React hooks for state
 import Grid from '@mui/material/Grid2';  // Importing Grid component from MUI for layout management
 
 // project imports
-import PopularCard from './PopularCard';  // Card showing popular items/data
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';  // Card with line chart for orders
-import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';  // Dark-themed income card
+import PopularCard from './PopularCard';  
+import TotalOrderLineChartCard from './TotalOrderLineChartCard';  
+import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';  
+
 import TotalGrowthBarChart from './TotalGrowthBarChart';  // Bar chart showing growth metrics
 import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 import { gridSpacing } from 'store/constant';  // Constant for consistent grid spacing
@@ -48,15 +49,15 @@ export default function Dashboard() {
         >oee</button>
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
         <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]} 
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]||'-'} 
              name="Good Production"  />  {/* Orders line chart */}
           </Grid>
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Reject_Counters[0]}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Reject_Counters[0]||'-'}
              name="Bad Production" />  {/* Orders line chart */}
           </Grid>
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* Second orders chart column */}
-            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Total_Production[0]} name="Total Production"/>  {/* Duplicate orders chart */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Total_Production[0]||'-'} name="Total Production"/>  {/* Duplicate orders chart */}
           </Grid>
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>  {/* Income cards column */}
             <Grid container spacing={gridSpacing}>  {/* Nested container for income cards */}

@@ -11,6 +11,7 @@ import AlarmReport from './Alarm';
 import Protected from './AuthLayout';
 import Audit2 from '../views/Audit2/Default';
 import Active_alarm from '../views/Active_alarm/Default';
+import Batch_details from '../views/batch_details';
 
 
 // dashboard routing
@@ -46,6 +47,10 @@ const MainRoutes = {
     {
       path: 'typography',
       element: <UtilsTypography />
+    },
+    {
+      path: 'batch',
+      element: <Batch_details />
     },
     {
       path: 'OEE',
