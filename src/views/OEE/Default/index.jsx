@@ -98,6 +98,16 @@ export default function Dashboard() {
     getoee(serialNumber,selectedDate,shiftDetailNum[selectedShift]).then((data)=>{
       if (data) {
         setShiftData(data[0].d)
+      }else{
+        setShiftData({shiftLengthHours: 0,
+          shortBreaksCount: 0,
+          shortBreaksMinutesEach: 0,
+          mealBreakCount: 0,
+          mealBreakMinutesEach: 0,
+          downTime: 0,
+          idealRunRate: 0,
+          totalProducts: 0,
+          rejectProducts: 0})
       }
     })
   },[selectedShift,selectedDate])
