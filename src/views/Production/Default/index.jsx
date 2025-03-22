@@ -3,19 +3,13 @@ import { useEffect, useState } from 'react';  // Importing React hooks for state
 // material-ui
 import Grid from '@mui/material/Grid2';  // Importing Grid component from MUI for layout management
 
-// project imports
-import EarningCard from './EarningCard';  // Card showing earning statistics
-import PopularCard from './PopularCard';  // Card showing popular items/data
+
 import TotalOrderLineChartCard from './TotalOrderLineChartCard';  // Card with line chart for orders
-import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';  // Dark-themed income card
-import TotalIncomeLightCard from '../../../ui-component/cards/TotalIncomeLightCard';  // Light-themed income card
-import TotalGrowthBarChart from './TotalGrowthBarChart';  // Bar chart showing growth metrics
 import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 import { gridSpacing } from 'store/constant';  // Constant for consistent grid spacing
 import { useLocation } from 'react-router';
 
 // assets
-import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';  // Icon for store/warehouse
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
