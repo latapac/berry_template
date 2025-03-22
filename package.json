@@ -10,6 +10,7 @@
     "@fontsource/roboto": "5.1.0",
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "6.1.9",
+    "@mui/x-charts": "^7.28.0",
     "@reduxjs/toolkit": "^2.6.1",
     "@tabler/icons-react": "3.24.0",
     "@tailwindcss/vite": "^4.0.14",
