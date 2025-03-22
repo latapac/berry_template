@@ -52,36 +52,10 @@ export default function Production() {
           <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* Second orders chart column */}
             <TotalOrderLineChartCard isLoading={isLoading} data={machineData?.d} />  {/* Duplicate orders chart */}
           </Grid>
-          <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>  {/* Income cards column */}
-            <Grid container spacing={gridSpacing}>  {/* Nested container for income cards */}
-              <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Dark income card */}
-                <TotalIncomeDarkCard isLoading={isLoading} data={serialNumber} />  {/* Dark theme income */}
-              </Grid>
-              <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Light income card */}
-                <TotalIncomeLightCard  // Light theme income showing bad production
-                  data={machineData?.d}
-                  {...{
-                    isLoading: isLoading,
-                    total: machineData?.d?.Reject_Counters[0],  // Show reject count
-                    label: 'Bad Production',  // Card label
-                    icon: <StorefrontTwoToneIcon fontSize="inherit" />  // Store icon
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
+        
         </Grid>
       </Grid>
-      <Grid size={12}>  {/* Second row taking full width */}
-        <Grid container spacing={gridSpacing}>  {/* Inner container for bottom row */}
-          <Grid size={{ xs: 12, md: 8 }}>  {/* Growth chart column */}
-            <TotalGrowthBarChart isLoading={isLoading} />  {/* Bar chart for growth */}
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>  {/* Popular items column */}
-            <PopularCard isLoading={isLoading} data={machineData?.d} />  {/* Popular items card */}
-          </Grid>
-        </Grid>
-      </Grid>
+    
     </Grid>
   );
 }
