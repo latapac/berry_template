@@ -13,7 +13,8 @@ const AlarmTable = ({ alarms }) => {
   };
 
   return (
-    <div className="bg-gray-300 rounded-lg shadow-lg p-6 mb-8 transition-shadow hover:shadow-xl">
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 mb-8 transition-shadow hover:shadow-xl">
+
       <h2 className="text-2xl font-semibold text-gray-800 mb-4 relative inline-block">
         Active Alarms Overview
         <span className="absolute bottom-0 left-0 w-1/2 h-1 bg-blue-500 rounded"></span>
@@ -54,7 +55,7 @@ const AlarmHistory = ({ history }) => {
   );
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-8 transition-shadow hover:shadow-xl">
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 mb-8 transition-shadow hover:shadow-xl">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4 relative inline-block">
         Alarm History
         <span className="absolute bottom-0 left-0 w-1/2 h-1 bg-blue-500 rounded"></span>
@@ -127,8 +128,8 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-8">
-      <h1 className="text-4xl font-bold text-gray-800 text-center mb-8">Alarm Monitoring System</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-4">
+      <h1 className="text-2xl font-bold text-gray-800 text-left mb-5">Alarm Monitoring System</h1>
       <AlarmTable alarms={activeAlarms} />
       <AlarmHistory history={alarmHistory} />
     </div>
