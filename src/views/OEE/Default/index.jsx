@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { getoee } from '../../../backservice';
 
-
 export default function Dashboard() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -10,7 +9,8 @@ export default function Dashboard() {
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedShift, setSelectedShift] = useState('Shift A');
-  const [shiftData,setShiftData] = useState({shiftLengthHours: 8,
+  const [shiftData, setShiftData] = useState({
+    shiftLengthHours: 8,
     shortBreaksCount: 2,
     shortBreaksMinutesEach: 15,
     mealBreakCount: 1,
@@ -18,7 +18,8 @@ export default function Dashboard() {
     downTime: 30,
     idealRunRate: 300,
     totalProducts: 100000,
-    rejectProducts: 10000})
+    rejectProducts: 10000,
+  });
   const [isPrinting, setIsPrinting] = useState(false);
 
   // Updated state variables with your example values
@@ -45,7 +46,6 @@ export default function Dashboard() {
       setIsPrinting(false);
     }, 100);
   };
-
 
   const shiftLengthMinutes = shiftData.shiftLengthHours * 60;
   const shortBreaksTotal = shiftData.shortBreaksCount * shiftData.shortBreaksMinutesEach;
@@ -90,20 +90,21 @@ export default function Dashboard() {
     { metric: "OVERALL OEE", worldClass: 85.00, myOee: overallOEE.toFixed(2), className: "bg-green-200" },
   ];
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(serialNumber);
-    getoee(serialNumber).then((data)=>{
+    getoee(serialNumber).then((data) => {
       console.log(data);
-    })
-  },[])
+    });
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100">
-      <div className="w-full mb-4 flex justify-between items-center no-print">
-        <h1 className="text-2xl font-bold text-gray-800 text-left print:text-center">
+      {/* Header Section */}
+      <div className="w-full mb-4 flex flex-wrap justify-between items-center no-print gap-2">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 text-left print:text-center">
           OEE Details
         </h1>
-        <div className="flex items-center gap-2 relative">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1">
             <label htmlFor="select-date" className="text-xs font-medium text-gray-700">Date:</label>
             <input
@@ -136,6 +137,7 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="w-full print-area space-y-4">
         {/* Parameters Before the First Table */}
         <div className="header-area text-sm text-gray-800">
@@ -153,6 +155,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Tables */}
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 bg-white rounded shadow-md overflow-hidden">
             <table className="w-full border-collapse border-l border-r border-t border-gray-300">
@@ -272,12 +275,12 @@ export default function Dashboard() {
         }
         .header-columns {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           gap: 1rem;
           width: 100%;
         }
         .column-left, .column-right {
-          width: 50%;
+          width: 100%;
           box-sizing: border-box;
         }
         .header-line {
@@ -285,6 +288,14 @@ export default function Dashboard() {
         }
         .header-line:last-child {
           margin-bottom: 0; /* Remove margin from the last line to avoid extra space */
+        }
+        @media (min-width: 768px) {
+          .header-columns {
+            flex-direction: row;
+          }
+          .column-left, .column-right {
+            width: 50%;
+          }
         }
         @media print {
           body * {

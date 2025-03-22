@@ -91,8 +91,11 @@ const AlarmHistory = ({ history }) => {
         onChange={(e) => setFilter(e.target.value)}
         className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
       />
+
+      {/* Responsive Table */}
       <div className="overflow-x-auto">
-        <table className="w-full">
+        {/* Desktop Table */}
+        <table className="w-full mt-4 hidden md:table">
           <thead>
             <tr className="bg-gray-800 text-white uppercase text-sm">
               <th className="px-2 py-3">ID</th>
@@ -112,6 +115,24 @@ const AlarmHistory = ({ history }) => {
             ))}
           </tbody>
         </table>
+
+        {/* Mobile Table */}
+        <div className="md:hidden">
+          {filteredHistory.map((alarm) => (
+            <div key={alarm.id} className="bg-white text-gray-800 p-4 mb-4 rounded-lg shadow-sm">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="font-medium">ID:</div>
+                <div>{alarm.id}</div>
+                <div className="font-medium">Timestamp:</div>
+                <div>{new Date(alarm.timestamp).toLocaleString()}</div>
+                <div className="font-medium">Description:</div>
+                <div>{alarm.description}</div>
+                <div className="font-medium">Resolution Status:</div>
+                <div>{alarm.resolution}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

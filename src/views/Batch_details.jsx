@@ -25,37 +25,73 @@ function BatchDetails() {
       <h1 style={styles.header}>Batch Overview</h1>
 
       {/* Batch Table */}
-      <table style={styles.table}>
-        <thead>
-          <tr style={styles.tableHeaderRow}>
-            <th style={styles.tableHeader}>Batch ID</th>
-            <th style={styles.tableHeader}>Start Time</th>
-            <th style={styles.tableHeader}>End Time</th>
-            <th style={styles.tableHeader}>Machine Line No.</th>
-            <th style={styles.tableHeader}>Status</th>
-            <th style={styles.tableHeader}>Units Produced</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div style={styles.tableContainer}>
+        {/* Desktop Table */}
+        <table style={{ ...styles.table, display: window.innerWidth > 768 ? 'table' : 'none' }}>
+          <thead>
+            <tr style={styles.tableHeaderRow}>
+              <th style={styles.tableHeader}>Batch ID</th>
+              <th style={styles.tableHeader}>Start Time</th>
+              <th style={styles.tableHeader}>End Time</th>
+              <th style={styles.tableHeader}>Machine Line No.</th>
+              <th style={styles.tableHeader}>Status</th>
+              <th style={styles.tableHeader}>Units Produced</th>
+            </tr>
+          </thead>
+          <tbody>
+            {batchData.map((batch) => (
+              <tr
+                key={batch.batchId}
+                onClick={() => handleBatchClick(batch.batchId)}
+                style={{
+                  ...styles.tableRow,
+                  backgroundColor: selectedBatch === batch.batchId ? '#e3f2fd' : 'white',
+                }}
+              >
+                <td style={styles.tableCell}>{batch.batchId}</td>
+                <td style={styles.tableCell}>{batch.startTime}</td>
+                <td style={styles.tableCell}>{batch.endTime}</td>
+                <td style={styles.tableCell}>{batch.machineLineNo}</td>
+                <td style={{ ...styles.tableCell, color: getStatusColor(batch.status) }}>{batch.status}</td>
+                <td style={styles.tableCell}>{batch.unitsProduced}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Mobile Table */}
+        <div style={{ display: window.innerWidth <= 768 ? 'block' : 'none' }}>
           {batchData.map((batch) => (
-            <tr
+            <div
               key={batch.batchId}
               onClick={() => handleBatchClick(batch.batchId)}
               style={{
-                ...styles.tableRow,
+                ...styles.mobileTableRow,
                 backgroundColor: selectedBatch === batch.batchId ? '#e3f2fd' : 'white',
               }}
             >
-              <td style={styles.tableCell}>{batch.batchId}</td>
-              <td style={styles.tableCell}>{batch.startTime}</td>
-              <td style={styles.tableCell}>{batch.endTime}</td>
-              <td style={styles.tableCell}>{batch.machineLineNo}</td>
-              <td style={{ ...styles.tableCell, color: getStatusColor(batch.status) }}>{batch.status}</td>
-              <td style={styles.tableCell}>{batch.unitsProduced}</td>
-            </tr>
+              <div style={styles.mobileTableCell}>
+                <strong>Batch ID:</strong> {batch.batchId}
+              </div>
+              <div style={styles.mobileTableCell}>
+                <strong>Start Time:</strong> {batch.startTime}
+              </div>
+              <div style={styles.mobileTableCell}>
+                <strong>End Time:</strong> {batch.endTime}
+              </div>
+              <div style={styles.mobileTableCell}>
+                <strong>Machine Line No.:</strong> {batch.machineLineNo}
+              </div>
+              <div style={{ ...styles.mobileTableCell, color: getStatusColor(batch.status) }}>
+                <strong>Status:</strong> {batch.status}
+              </div>
+              <div style={styles.mobileTableCell}>
+                <strong>Units Produced:</strong> {batch.unitsProduced}
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
 
       {/* Batch Metrics */}
       <h2 style={styles.subHeader}>Batch Metrics</h2>
@@ -79,7 +115,7 @@ function BatchDetails() {
       {/* Batch Performance Chart */}
       <h2 style={styles.subHeader}>Batch Performance Across Machines</h2>
       <div style={styles.chartContainer}>
-        <ResponsiveContainer width="80%" height={300}>
+        <ResponsiveContainer width="100%" height={300}>
           <BarChart data={batchData}>
             <XAxis dataKey="machineLineNo" />
             <YAxis />
@@ -127,7 +163,8 @@ const styles = {
   container: {
     padding: '20px',
     fontFamily: 'Arial, sans-serif',
-    width: '70vw',
+    width: '100%', // Adjusted for smaller screens
+    maxWidth: '1200px', // Max width for larger screens
     margin: '0 auto',
     backgroundColor: '#f5f5f5',
     borderRadius: '8px',
@@ -138,7 +175,7 @@ const styles = {
     color: '#333',
     fontSize: '24px',
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'start'
   },
   subHeader: {
     marginBottom: '20px',
@@ -148,10 +185,12 @@ const styles = {
     borderBottom: '2px solid #82ca9d',
     paddingBottom: '8px',
   },
+  tableContainer: {
+    marginBottom: '20px',
+  },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
-    marginBottom: '20px',
     backgroundColor: 'white',
     borderRadius: '8px',
     overflow: 'hidden',
@@ -177,17 +216,32 @@ const styles = {
     padding: '12px',
     color: '#555',
   },
+  mobileTableRow: {
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    marginBottom: '10px',
+    padding: '12px',
+    backgroundColor: 'white',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+  },
+  mobileTableCell: {
+    marginBottom: '8px',
+    color: '#555',
+  },
   metricsContainer: {
     display: 'flex',
+    flexWrap: 'wrap', // Allow wrapping on small screens
     justifyContent: 'space-around',
     marginBottom: '20px',
-    flexWrap: 'wrap',
     gap: '20px',
   },
   metricCard: {
     border: '1px solid #ddd',
     padding: '20px',
-    width: '30%',
+    width: '100%', // Full width on small screens
+    maxWidth: '300px', // Max width for larger screens
     borderRadius: '8px',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
     color: 'white',
