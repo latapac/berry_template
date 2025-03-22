@@ -21,12 +21,12 @@ const AlarmTable = ({ alarms }) => {
       </h2>
       <table className="w-full mt-4">
         <thead>
-          <tr className="bg-gray-700 text-white uppercase text-sm">
-            <th className="px-4 py-3">Alarm ID</th>
-            <th className="px-4 py-3">Machine Line</th>
-            <th className="px-4 py-3">Timestamp</th>
-            <th className="px-4 py-3">Severity</th>
-            <th className="px-4 py-3">Description</th>
+          <tr className="bg-gray-200 text-gray-700">
+            <th className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">Alarm ID</th>
+            <th className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">Timestamp</th>
+            <th className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">Machine Line</th>
+            <th className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">Severity</th>
+            <th className="px-2 py-1 text-xs font-medium uppercase tracking-wider border-b">Description</th>
           </tr>
         </thead>
         <tbody>

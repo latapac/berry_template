@@ -12,6 +12,7 @@ import TotalGrowthBarChart from './TotalGrowthBarChart';  // Bar chart showing g
 import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 import { gridSpacing } from 'store/constant';  // Constant for consistent grid spacing
 import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 
 
 // assets
@@ -25,6 +26,7 @@ export default function Dashboard() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serialNumber = queryParams.get('serial_number');
+  const navigate = useNavigate()
 
  
   useEffect(() => {
@@ -42,6 +44,9 @@ export default function Dashboard() {
   return (
     <Grid container spacing={gridSpacing}>  {/* Outer container for entire dashboard */}
       <Grid size={12}>  {/* First row taking full width */}
+        <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >oee</button>
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
         <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
             <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]||'-'} 
