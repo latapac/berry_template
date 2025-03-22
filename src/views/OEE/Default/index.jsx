@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { getMachineData } from "../../../backservice";
+import { getoee } from '../../../backservice';
+
 
 export default function Dashboard() {
   const location = useLocation();
@@ -9,6 +10,15 @@ export default function Dashboard() {
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedShift, setSelectedShift] = useState('Shift A');
+  const [shiftData,setShiftData] = useState({shiftLengthHours: 8,
+    shortBreaksCount: 2,
+    shortBreaksMinutesEach: 15,
+    mealBreakCount: 1,
+    mealBreakMinutesEach: 60,
+    downTime: 30,
+    idealRunRate: 300,
+    totalProducts: 100000,
+    rejectProducts: 10000})
   const [isPrinting, setIsPrinting] = useState(false);
 
   // Updated state variables with your example values
@@ -36,34 +46,24 @@ export default function Dashboard() {
     }, 100);
   };
 
-  // Simulated server data
-  const shiftLengthHours = 8;
-  const shortBreaksCount = 2;
-  const shortBreaksMinutesEach = 15;
-  const mealBreakCount = 1;
-  const mealBreakMinutesEach = 60;
-  const downTime = 30;
-  const idealRunRate = 300;
-  const totalProducts = 100000;
-  const rejectProducts = 10000;
 
-  const shiftLengthMinutes = shiftLengthHours * 60;
-  const shortBreaksTotal = shortBreaksCount * shortBreaksMinutesEach;
-  const mealBreakTotal = mealBreakCount * mealBreakMinutesEach;
+  const shiftLengthMinutes = shiftData.shiftLengthHours * 60;
+  const shortBreaksTotal = shiftData.shortBreaksCount * shiftData.shortBreaksMinutesEach;
+  const mealBreakTotal = shiftData.mealBreakCount * shiftData.mealBreakMinutesEach;
 
   const productionData = [
-    { metric: "Shift Length", calculation: `${shiftLengthHours} Hours × 60`, result: `${shiftLengthMinutes} Minutes` },
-    { metric: "Short Breaks", calculation: `${shortBreaksCount} × ${shortBreaksMinutesEach}`, result: `${shortBreaksTotal} Minutes Total` },
-    { metric: "Meal Break", calculation: `${mealBreakCount} × ${mealBreakMinutesEach}`, result: `${mealBreakTotal} Minutes Total` },
-    { metric: "Down Time", calculation: "", result: `${downTime} Minutes` },
-    { metric: "Ideal Run Rate", calculation: "", result: `${idealRunRate} PPM (Products Per Minute)` },
-    { metric: "Total Products", calculation: "", result: `${totalProducts.toLocaleString()} Products` },
-    { metric: "Reject Products", calculation: "", result: `${rejectProducts.toLocaleString()} Products` },
+    { metric: "Shift Length", calculation: `${shiftData.shiftLengthHours} Hours × 60`, result: `${shiftLengthMinutes} Minutes` },
+    { metric: "Short Breaks", calculation: `${shiftData.shortBreaksCount} × ${shiftData.shortBreaksMinutesEach}`, result: `${shortBreaksTotal} Minutes Total` },
+    { metric: "Meal Break", calculation: `${shiftData.mealBreakCount} × ${shiftData.mealBreakMinutesEach}`, result: `${mealBreakTotal} Minutes Total` },
+    { metric: "Down Time", calculation: "", result: `${shiftData.downTime} Minutes` },
+    { metric: "Ideal Run Rate", calculation: "", result: `${shiftData.idealRunRate} PPM (Products Per Minute)` },
+    { metric: "Total Products", calculation: "", result: `${shiftData.totalProducts.toLocaleString()} Products` },
+    { metric: "Reject Products", calculation: "", result: `${shiftData.rejectProducts.toLocaleString()} Products` },
   ];
 
   const plannedProductionTime = shiftLengthMinutes - (shortBreaksTotal + mealBreakTotal);
-  const operatingTime = plannedProductionTime - downTime;
-  const goodProducts = totalProducts - rejectProducts;
+  const operatingTime = plannedProductionTime - shiftData.downTime;
+  const goodProducts = shiftData.totalProducts - shiftData.rejectProducts;
 
   const supportVariable = [
     { metric: "Planned Production Time", calculation: "Shift Length - Breaks", result: plannedProductionTime },
@@ -72,8 +72,8 @@ export default function Dashboard() {
   ];
 
   const availability = (operatingTime / plannedProductionTime) * 100;
-  const performance = (totalProducts / (operatingTime * idealRunRate)) * 100;
-  const quality = (goodProducts / totalProducts) * 100;
+  const performance = (shiftData.totalProducts / (operatingTime * shiftData.idealRunRate)) * 100;
+  const quality = (goodProducts / shiftData.totalProducts) * 100;
   const overallOEE = (availability * performance * quality) / 10000;
 
   const oeeFactor = [
@@ -89,6 +89,13 @@ export default function Dashboard() {
     { metric: "Quality", worldClass: 99.90, myOee: quality.toFixed(2), className: "bg-purple-200" },
     { metric: "OVERALL OEE", worldClass: 85.00, myOee: overallOEE.toFixed(2), className: "bg-green-200" },
   ];
+
+  useEffect(()=>{
+    console.log(serialNumber);
+    getoee(serialNumber).then((data)=>{
+      console.log(data);
+    })
+  },[])
 
   return (
     <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100">
