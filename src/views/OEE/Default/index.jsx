@@ -3,11 +3,19 @@ import { useLocation } from 'react-router';
 import { getoee } from '../../../backservice';
 
 export default function Dashboard() {
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serialNumber = queryParams.get('serial_number');
-
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState(getCurrentDate());
   const [selectedShift, setSelectedShift] = useState('Shift A');
   const [shiftData,setShiftData] = useState({shiftLengthHours: 0,
     shortBreaksCount: 0,
@@ -19,6 +27,8 @@ export default function Dashboard() {
     totalProducts: 0,
     rejectProducts: 0})
   const [isPrinting, setIsPrinting] = useState(false);
+
+  
 
   // Updated state variables with your example values
   const [reportDate] = useState('22/3/2025');
@@ -95,6 +105,8 @@ export default function Dashboard() {
   ];
 
   useEffect(()=>{
+    
+    
     getoee(serialNumber,selectedDate,shiftDetailNum[selectedShift]).then((data)=>{
       if (data) {
         setShiftData(data[0].d)
@@ -158,7 +170,7 @@ export default function Dashboard() {
           <div className="header-columns">
             <div className="column-left">
               <p className="header-line"><strong>Equipment ID:</strong> {serialNumber || 'PAC24250046'}</p>
-              <p className="header-line"><strong>Report Date:</strong> {reportDate}</p>
+              <p className="header-line"><strong>Report Date:</strong> {selectedDate}</p>
               <p className="header-line"><strong>Time Range:</strong> {timeRange}</p>
             </div>
             <div className="column-right">

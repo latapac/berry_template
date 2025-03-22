@@ -26,30 +26,7 @@ const dashboard = {
       icon: icons.IconDashboard,
       breadcrumbs: false
     },
-    {
-      id: 'default',
-      title: 'Dash2',
-      type: 'item',
-      url: '/dash',
-      icon: icons.IconDashboard,
-      breadcrumbs: false
-    },
-    {
-      id: 'default',
-      title: 'OEE',
-      type: 'item',
-      url: '/OEE?serial_number=PAC24250046',
-      icon: icons.IconDashboard,
-      breadcrumbs: false
-    },
-    {
-      id: 'default',
-      title: 'Production',
-      type: 'item',
-      url: '/Production',
-      icon: icons.IconDashboard,
-      breadcrumbs: false
-    },
+   
     {
       id: 'default',
       title: 'Audit2',
@@ -64,14 +41,6 @@ const dashboard = {
       type: 'item',
       url: '/Active_alarm',
       icon: iconb.IconAlarm,
-      breadcrumbs: false
-    },
-    {
-      id: 'default',
-      title: 'Batch_Details',
-      type: 'item',
-      url: '/batch',
-      icon: iconbs.IconDetails,
       breadcrumbs: false
     },
     {
