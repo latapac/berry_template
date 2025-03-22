@@ -43,10 +43,21 @@ export default function Dashboard() {
   // Main render return with grid layout
   return (
     <Grid container spacing={gridSpacing}>  {/* Outer container for entire dashboard */}
-      <Grid size={12}>  {/* First row taking full width */}
-        <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
+      <Grid size={12}>  
+        <div sx={{gap: '5vh'}}>{/* First row taking full width */}
+        <button className='p-3 text-slate-100  cursor-pointer rounded-lg mb-1 mr-3 bg-blue-600' 
         onClick={()=>navigate("/oee?serial_number="+serialNumber)}
-        >oee</button>
+        >OEE</button>
+          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-green-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >Production Details</button>
+          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-yellow-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >Batch Details</button>
+         <button className='p-3 text-slate-100  cursor-pointer mb-1 rounded-lg bg-orange-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >Report</button>
+        </div>
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
         <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
             <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]||'-'} 
