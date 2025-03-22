@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Skeleton, Box, Grid } from '@mui/material';
 import { Bar, Pie } from 'react-chartjs-2';
 
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -49,7 +50,7 @@ const TotalOrderBarChartCard = ({ isLoading, data }) => {
     labels: ['Good Production', 'Rejected Production'],
     datasets: [
       {
-        data: [770, 130], // Example data for pie chart
+        data: [700, 130], // Example data for pie chart
         backgroundColor: ['rgba(75, 192, 10, 0.75)', 'rgba(255, 99, 132, 0.6)'],
         borderColor: ['rgba(75, 192, 10, 1)', 'rgba(255, 99, 132, 1)'],
         borderWidth: 1,
@@ -66,7 +67,7 @@ const TotalOrderBarChartCard = ({ isLoading, data }) => {
           datasets: [
             {
               ...prevData.datasets[0],
-              data: [...prevData.datasets[0].data, 770], // Actual Production
+              data: [...prevData.datasets[0].data, 700], // Actual Production
             },
             {
               ...prevData.datasets[1],
@@ -235,7 +236,7 @@ const TotalOrderBarChartCard = ({ isLoading, data }) => {
                     Total Production
                   </Typography>
                   <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                    900
+                    990
                   </Typography>
                 </Box>
               </Grid>
@@ -253,7 +254,7 @@ const TotalOrderBarChartCard = ({ isLoading, data }) => {
                     Good Production
                   </Typography>
                   <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                    770
+                    900
                   </Typography>
                 </Box>
               </Grid>
@@ -271,7 +272,7 @@ const TotalOrderBarChartCard = ({ isLoading, data }) => {
                     Rejected Production
                   </Typography>
                   <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                    130
+                    90
                   </Typography>
                 </Box>
               </Grid>
