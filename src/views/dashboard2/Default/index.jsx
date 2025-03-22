@@ -47,6 +47,15 @@ export default function Dashboard() {
         <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
         onClick={()=>navigate("/oee?serial_number="+serialNumber)}
         >oee</button>
+         <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
+        onClick={()=>navigate("/production?serial_number="+serialNumber)}
+        >Production</button>
+        <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
+        onClick={()=>navigate("/batch?serial_number="+serialNumber)}
+        >batch details</button>
+          <button className='p-3 text-slate-100 rounded-2xl cursor-pointer mb-1 bg-blue-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >reports</button>
         <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
         <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
             <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]||'-'} 
