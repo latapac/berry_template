@@ -7,14 +7,11 @@ import Grid from '@mui/material/Grid2';  // Importing Grid component from MUI fo
 import PopularCard from './PopularCard';  // Card showing popular items/data
 import TotalOrderLineChartCard from './TotalOrderLineChartCard';  // Card with line chart for orders
 import TotalIncomeDarkCard from '../../../ui-component/cards/TotalIncomeDarkCard';  // Dark-themed income card
-import TotalIncomeLightCard from '../../../ui-component/cards/TotalIncomeLightCard';  // Light-themed income card
 import TotalGrowthBarChart from './TotalGrowthBarChart';  // Bar chart showing growth metrics
 import {getMachineData} from "../../../backservice";  // Function to fetch machine data from backend
 import { gridSpacing } from 'store/constant';  // Constant for consistent grid spacing
 import { useLocation } from 'react-router';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { IconCircleCheck } from '@tabler/icons-react';
+
 
 // assets
 
@@ -35,8 +32,8 @@ export default function Dashboard() {
   
   
   useEffect(() => {
-    getMachineData(serialNumber).then((data) => {  // Fetch data for specific machine ID
-      setMachineData(data);  // Update state with fetched data
+    getMachineData(serialNumber).then((data) => { 
+      setMachineData(data); 
     });
   }, []);
 
