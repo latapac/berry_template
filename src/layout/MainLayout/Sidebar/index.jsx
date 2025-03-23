@@ -79,7 +79,7 @@ function Sidebar() {
           ModalProps={{ keepMounted: true }}
           color="inherit"
         >
-          {downMD}
+          {downMD && logo}
           {drawer}
         </Drawer>
       ) : (

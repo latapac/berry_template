@@ -2,12 +2,15 @@
 import { IconDashboard } from '@tabler/icons-react';
 import { IconNotebook } from '@tabler/icons-react';
 import { IconAlarm } from '@tabler/icons-react';
+import { IconDetails } from '@tabler/icons-react';
+
 // constant
 const icons = { IconDashboard };
 const icon = { IconNotebook };
 const icona = { IconAlarm };
 const iconi = { IconNotebook };
 const iconb = { IconAlarm };
+const iconbs = {IconDetails};
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
