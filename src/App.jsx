@@ -9,9 +9,6 @@ import { Provider } from 'react-redux';
 import ThemeCustomization from 'themes';
 import store from './store/store';
 
-// auth provider
-
-// ==============================|| APP ||============================== //
 
 export default function App() {
   return (
