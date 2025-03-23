@@ -11,6 +11,7 @@ import AuthWrapper1 from './AuthWrapper1';
 import AuthCardWrapper from './AuthCardWrapper';
 import AuthRegister from '../auth-forms/AuthRegister';
 
+import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 
 export default function Register() {
@@ -24,7 +25,11 @@ export default function Register() {
             <Grid sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
               <AuthCardWrapper>
                 <Grid container spacing={2} sx={{ alignItems: 'center', justifyContent: 'center' }}>
-                  
+                  <Grid sx={{ mb: 3 }}>
+                    <Link to="#" aria-label="theme logo">
+                      <Logo />
+                    </Link>
+                  </Grid>
                   <Grid size={12}>
                     <Grid container direction={{ xs: 'column-reverse', md: 'row' }} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                       <Grid>

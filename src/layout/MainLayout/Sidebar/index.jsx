@@ -11,6 +11,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 
 import MenuList from '../MenuList';
+import LogoSection from '../LogoSection';
 import MiniDrawerStyled from './MiniDrawerStyled';
 
 import useConfig from 'hooks/useConfig';
@@ -28,7 +29,14 @@ function Sidebar() {
 
   const { miniDrawer, mode } = useConfig();
 
-
+  const logo = useMemo(
+    () => (
+      <Box sx={{ display: 'flex', p: 2 }}>
+        <LogoSection />
+      </Box>
+    ),
+    []
+  );
 
   const drawer = useMemo(() => {
     const drawerContent = (
@@ -84,6 +92,7 @@ function Sidebar() {
         </Drawer>
       ) : (
         <MiniDrawerStyled variant="permanent" open={drawerOpen}>
+          {logo}
           {drawer}
         </MiniDrawerStyled>
       )}

@@ -2,6 +2,7 @@
 
 // project imports
 import MainLayout from 'layout/MainLayout';
+import Loadable from 'ui-component/Loadable';
 import AuditTrail from './Audit_Trial';
 import Dashboard from '../views/dashboard2/Default';
 import OEE from '../views/OEE/Default';
@@ -16,7 +17,13 @@ import Batch_details from '../views/batch_details';
 // dashboard routing
 import DashboardDefault from 'views/dashboard/Default'
 
+// utilities routing
+import UtilsTypography from 'views/utilities/Typography'
+import UtilsColor from 'views/utilities/Color'
+import UtilsShadow from 'views/utilities/Shadow'
 
+// sample page routing
+import SamplePage from 'views/sample-page'
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -36,6 +43,10 @@ const MainRoutes = {
           element: <DashboardDefault />
         }
       ]
+    },
+    {
+      path: 'typography',
+      element: <UtilsTypography />
     },
     {
       path: 'batch',
@@ -64,6 +75,18 @@ const MainRoutes = {
     {
       path: 'dash',
       element: <Dashboard />
+    },
+    {
+      path: 'color',
+      element: <UtilsColor />
+    },
+    {
+      path: 'shadow',
+      element: <UtilsShadow />
+    },
+    {
+      path: '/sample-page',
+      element: <SamplePage />
     },
     {
       path: '/alarm',
