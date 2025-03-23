@@ -22,7 +22,6 @@ export default function Header() {
 
   return (
     <>
-      {/* logo & toggler button */}
       <Box sx={{ width: downMD ? 'auto' : 228, display: 'flex' }}>
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 ,fontSize: '4vh'}}>      
           PACMAC
