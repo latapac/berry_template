@@ -622,108 +622,42 @@ export default function Dashboard() {
   }, [serialNumber]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">Analytics</h1>
-
-      <div className="mb-8">
-        <button 
-          className="text-sm text-gray-700 bg-white border border-gray-200 rounded-md px-3 py-1 mr-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => navigate("/oee?serial_number=" + serialNumber)}
-        >
-          OEE
-        </button>
-        <button 
-          className="text-sm text-gray-700 bg-white border border-gray-200 rounded-md px-3 py-1 mr-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => navigate("/production?serial_number=" + serialNumber)}
-        >
-          Production
-        </button>
-        <button 
-          className="text-sm text-gray-700 bg-white border border-gray-200 rounded-md px-3 py-1 mr-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => navigate("/batch?serial_number=" + serialNumber)}
-        >
-          Batch
-        </button>
-        <button 
-          className="text-sm text-gray-700 bg-white border border-gray-200 rounded-md px-3 py-1 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => navigate("/oee?serial_number=" + serialNumber)}
-        >
-          Report
-        </button>
-      </div>
-
-      <div className="flex gap-4 mb-6">
-        <SpeedBox 
-          speed={machineData?.d?.current_speed[0]} 
-          isLoading={isLoading}
-        />
-        <GoodProductionBox 
-          goodValue={machineData?.d?.Good_Count[0]}
-          rejectValue={machineData?.d?.Reject_Counters[0]}
-          totalValue={machineData?.d?.Total_Production[0]}
-          isLoading={isLoading}
-        />
-        <OEEBox 
-          availability={machineData?.d?.Availability?.[0]} // Adjust based on your data structure
-          performance={machineData?.d?.Performance?.[0]}   // Adjust based on your data structure
-          quality={machineData?.d?.Quality?.[0]}           // Adjust based on your data structure
-          isLoading={isLoading}
-        />
-        <TotalProductionBox 
-          value={machineData?.d?.Total_Production[0]}
-          isLoading={isLoading}
-        />
-      </div>
-
-      {/* Flex container for MachineSpeedGraph and OEEGraph */}
-      <div className="flex gap-4 mb-6">
-        <MachineSpeedGraph
-          speedData={machineData?.d?.current_speed[0]}
-          isLoading={isLoading}
-          timeRange={timeRange}
-          setTimeRange={setTimeRange}
-        />
-        <OEEGraph
-          availability={machineData?.d?.Availability?.[0]}
-          performance={machineData?.d?.Performance?.[0]}
-          quality={machineData?.d?.Quality?.[0]}
-          isLoading={isLoading}
-          timeRange={timeRange}
-        />
-      </div>
-
-      <Grid container spacing={gridSpacing}>
-        <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
-          <TotalOrderLineChartCard 
-            isLoading={isLoading} 
-            Count={machineData?.d?.Good_Count[0] || '-'} 
-            name="Good Production" 
-          />
-        </Grid>
-        <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
-          <TotalOrderLineChartCard 
-            isLoading={isLoading} 
-            Count={machineData?.d?.Reject_Counters[0] || '-'} 
-            name="Bad Production" 
-          />
-        </Grid>
-        <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>
-          <TotalOrderLineChartCard 
-            isLoading={isLoading} 
-            Count={machineData?.d?.Total_Production[0] || '-'} 
-            name="Total Production" 
-          />
-        </Grid>
-        <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
-          <Grid container spacing={gridSpacing}>
-            <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
-              <TotalIncomeDarkCard 
-                isLoading={isLoading} 
-                data={serialNumber} 
-                Speed={machineData?.d?.current_speed[0]} 
-              />
-            </Grid>
-            <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
+    <Grid container spacing={gridSpacing}>  {/* Outer container for entire dashboard */}
+      <Grid size={12}>  
+        <div sx={{gap: '5vh'}}>{/* First row taking full width */}
+        <button className='p-3 text-slate-100  cursor-pointer rounded-lg mb-1 mr-3 bg-blue-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >OEE</button>
+          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-green-600' 
+        onClick={()=>navigate("/production?serial_number="+serialNumber)}
+        >Production Details</button>
+          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-yellow-600' 
+        onClick={()=>navigate("/batch?serial_number="+serialNumber)}
+        >Batch Details</button>
+         <button className='p-3 text-slate-100  cursor-pointer mb-1 rounded-lg bg-orange-600' 
+        onClick={()=>navigate("/oee?serial_number="+serialNumber)}
+        >Report</button>
+        </div>
+        <Grid container spacing={gridSpacing}>  {/* Inner container for top row cards */}
+        <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Good_Count[0]||'-'} 
+             name="Good Production"  />  {/* Orders line chart */}
+          </Grid>
+          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* First orders chart column */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Reject_Counters[0]||'-'}
+             name="Bad Production" />  {/* Orders line chart */}
+          </Grid>
+          <Grid size={{ lg: 2.65, md: 6, sm: 6, xs: 12 }}>  {/* Second orders chart column */}
+            <TotalOrderLineChartCard isLoading={isLoading} Count={machineData?.d?.Total_Production[0]||'-'} name="Total Production"/>  {/* Duplicate orders chart */}
+          </Grid>
+          <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>  {/* Income cards column */}
+            <Grid container spacing={gridSpacing}>  {/* Nested container for income cards */}
+              <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Dark income card */}
+                <TotalIncomeDarkCard isLoading={isLoading} data={serialNumber} Speed={machineData?.d?.current_speed[0]} />  {/* Dark theme income */}
+              </Grid>
+              <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>  {/* Light income card */}
+              
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
