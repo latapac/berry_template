@@ -51,7 +51,7 @@ export default function Dashboard() {
           <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-green-600' 
         onClick={()=>navigate("/production?serial_number="+serialNumber)}
         >Production Details</button>
-          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-yellow-600' 
+          <button className='p-3 text-slate-100  cursor-pointer mb-1 mr-3 rounded-lg bg-yellow-500' 
         onClick={()=>navigate("/batch?serial_number="+serialNumber)}
         >Batch Details</button>
          <button className='p-3 text-slate-100  cursor-pointer mb-1 rounded-lg bg-orange-600' 
